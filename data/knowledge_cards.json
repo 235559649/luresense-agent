@@ -1,0 +1,505 @@
+[
+  {
+    "id": "K001",
+    "title": "学名要随来源保存",
+    "source_ids": [
+      "S02"
+    ],
+    "locator": "Scientific Name",
+    "claim": "当前 MDC 页面将 largemouth bass 标为 Micropterus nigricans，并列 M. salmoides 为同物异名。",
+    "topic": "taxonomy",
+    "applicability": "该页面命名语境",
+    "application_note": "检索保存 source_taxon；不得只按学名字符串自动合并。",
+    "application_note_type": "project_inference",
+    "tags": [
+      "大口黑鲈",
+      "学名",
+      "nigricans",
+      "salmoides"
+    ],
+    "species_scope": "largemouth_bass_source_context",
+    "review_status": "source_checked_not_expert_validated",
+    "version": "0.2",
+    "accessed_on": "2026-09-21"
+  },
+  {
+    "id": "K002",
+    "title": "Florida bass 分类边界",
+    "source_ids": [
+      "S03"
+    ],
+    "locator": "Appearance",
+    "claim": "FWC 提醒 Florida bass 已与 largemouth bass 分为不同物种，外观不易区分。",
+    "topic": "taxonomy",
+    "applicability": "佛州资料及其分类说明",
+    "application_note": "混合或旧分类资料标记适用风险，不作目标物种专属证据。",
+    "application_note_type": "project_inference",
+    "tags": [
+      "Florida bass",
+      "佛罗里达",
+      "分类"
+    ],
+    "species_scope": "largemouth_bass_source_context",
+    "review_status": "source_checked_not_expert_validated",
+    "version": "0.2",
+    "accessed_on": "2026-09-21"
+  },
+  {
+    "id": "K003",
+    "title": "掩护结构",
+    "source_ids": [
+      "S01"
+    ],
+    "locator": "Habitat",
+    "claim": "大口黑鲈会利用倒木、岩石台阶、植被及人工结构等掩护。",
+    "topic": "habitat",
+    "applicability": "来源描述的一般栖息行为",
+    "application_note": "用户确认的结构可列为观察候选；结构存在不证明鱼存在。",
+    "application_note_type": "project_inference",
+    "tags": [
+      "倒木",
+      "水草",
+      "岩石",
+      "掩护",
+      "结构"
+    ],
+    "species_scope": "largemouth_bass_source_context",
+    "review_status": "source_checked_not_expert_validated",
+    "version": "0.2",
+    "accessed_on": "2026-09-21"
+  },
+  {
+    "id": "K004",
+    "title": "成鱼食物",
+    "source_ids": [
+      "S01"
+    ],
+    "locator": "Life History",
+    "claim": "成鱼主要捕食其他鱼类及螯虾等较大无脊椎动物。",
+    "topic": "feeding",
+    "applicability": "成鱼；不套用于幼鱼",
+    "application_note": "可询问是否观察到饵鱼；食物资料不能证明现场存在饵鱼。",
+    "application_note_type": "project_inference",
+    "tags": [
+      "食物",
+      "饵鱼",
+      "螯虾",
+      "捕食"
+    ],
+    "species_scope": "largemouth_bass_source_context",
+    "review_status": "source_checked_not_expert_validated",
+    "version": "0.2",
+    "accessed_on": "2026-09-21"
+  },
+  {
+    "id": "K005",
+    "title": "水域类型",
+    "source_ids": [
+      "S02"
+    ],
+    "locator": "Habitat and Conservation",
+    "claim": "资料记录其出现在湖泊、人工蓄水区、溪流常年水潭及大河静水回湾。",
+    "topic": "habitat",
+    "applicability": "密苏里资料",
+    "application_note": "支持首版以湖库为例；不推断任意淡水水域都有该鱼。",
+    "application_note_type": "project_inference",
+    "tags": [
+      "水库",
+      "湖泊",
+      "回湾",
+      "池塘"
+    ],
+    "species_scope": "largemouth_bass_source_context",
+    "review_status": "source_checked_not_expert_validated",
+    "version": "0.2",
+    "accessed_on": "2026-09-21"
+  },
+  {
+    "id": "K006",
+    "title": "水流偏好",
+    "source_ids": [
+      "S02"
+    ],
+    "locator": "Habitat and Conservation",
+    "claim": "该页面描述其适于温暖、较清、少流或无流的水域。",
+    "topic": "habitat",
+    "applicability": "一般偏好，不是生存的排他条件",
+    "application_note": "不将强流偏好或浑水必无鱼写成规则。",
+    "application_note_type": "project_inference",
+    "tags": [
+      "水流",
+      "缓流",
+      "静水",
+      "浑水"
+    ],
+    "species_scope": "largemouth_bass_source_context",
+    "review_status": "source_checked_not_expert_validated",
+    "version": "0.2",
+    "accessed_on": "2026-09-21"
+  },
+  {
+    "id": "K007",
+    "title": "活动时段",
+    "source_ids": [
+      "S02"
+    ],
+    "locator": "Habitat and Conservation",
+    "claim": "该资料指出黎明和黄昏是较活跃时段。",
+    "topic": "time",
+    "applicability": "地区性概述，非咬口统计",
+    "application_note": "可作为观察时段参考；不能保证早晚中鱼或否定正午。",
+    "application_note_type": "project_inference",
+    "tags": [
+      "早晨",
+      "傍晚",
+      "黎明",
+      "黄昏"
+    ],
+    "species_scope": "largemouth_bass_source_context",
+    "review_status": "source_checked_not_expert_validated",
+    "version": "0.2",
+    "accessed_on": "2026-09-21"
+  },
+  {
+    "id": "K008",
+    "title": "繁殖信息需要地域",
+    "source_ids": [
+      "S01"
+    ],
+    "locator": "Life History",
+    "claim": "得州资料以约 60°F 水温描述春季繁殖启动，并说明州内月份有差异。",
+    "topic": "season",
+    "applicability": "美国得州；约 15.6°C 是换算，不是通用阈值",
+    "application_note": "不能据此判定中国或新加坡当下处于繁殖期。",
+    "application_note_type": "project_inference",
+    "tags": [
+      "繁殖",
+      "季节",
+      "春季",
+      "水温"
+    ],
+    "species_scope": "largemouth_bass_source_context",
+    "review_status": "source_checked_not_expert_validated",
+    "version": "0.2",
+    "accessed_on": "2026-09-21"
+  },
+  {
+    "id": "K009",
+    "title": "另一地区的繁殖描述",
+    "source_ids": [
+      "S02"
+    ],
+    "locator": "Life Cycle",
+    "claim": "密苏里资料将当地繁殖期描述为四月中旬至五月末或六月。",
+    "topic": "season",
+    "applicability": "仅密苏里背景",
+    "application_note": "与其他地区月份不同首先检查适用地区。",
+    "application_note_type": "project_inference",
+    "tags": [
+      "月份",
+      "繁殖",
+      "密苏里",
+      "春季"
+    ],
+    "species_scope": "largemouth_bass_source_context",
+    "review_status": "source_checked_not_expert_validated",
+    "version": "0.2",
+    "accessed_on": "2026-09-21"
+  },
+  {
+    "id": "K010",
+    "title": "防挂软虫钓组",
+    "source_ids": [
+      "S04"
+    ],
+    "locator": "Tackle and Bait",
+    "claim": "FWC 将防挂的德州或卡罗莱纳软虫钓组列为佛州浓植被湖泊的可用方法。",
+    "topic": "technique",
+    "applicability": "佛州黑鲈指导；对本项目为需验证的策略参考",
+    "application_note": "先确认植被和用户装备；不宣称必不挂底或必有效。",
+    "application_note_type": "project_inference",
+    "tags": [
+      "德州",
+      "卡罗莱纳",
+      "软虫",
+      "水草",
+      "防挂"
+    ],
+    "species_scope": "largemouth_bass_source_context",
+    "review_status": "source_checked_not_expert_validated",
+    "version": "0.2",
+    "accessed_on": "2026-09-21"
+  },
+  {
+    "id": "K011",
+    "title": "软虫操作参考",
+    "source_ids": [
+      "S04"
+    ],
+    "locator": "Tackle and Bait",
+    "claim": "该指南描述软虫沿底部或掩护缓慢操作，抬竿后让其下沉。",
+    "topic": "technique",
+    "applicability": "同指南区域；底部与障碍未知时需谨慎解释",
+    "application_note": "作为候选操作；未知水深时不承诺落底或给精确秒数。",
+    "application_note_type": "project_inference",
+    "tags": [
+      "软虫",
+      "慢收",
+      "下沉",
+      "操作"
+    ],
+    "species_scope": "largemouth_bass_source_context",
+    "review_status": "source_checked_not_expert_validated",
+    "version": "0.2",
+    "accessed_on": "2026-09-21"
+  },
+  {
+    "id": "K012",
+    "title": "摇滚饵潜深",
+    "source_ids": [
+      "S04"
+    ],
+    "locator": "Tackle and Bait",
+    "claim": "摇滚饵常模拟饵鱼或螯虾，导水舌设计影响潜深。",
+    "topic": "technique",
+    "applicability": "同指南区域，具体产品参数另查",
+    "application_note": "选饵需结合已知水深及产品信息，不猜具体型号潜深。",
+    "application_note_type": "project_inference",
+    "tags": [
+      "crankbait",
+      "摇滚饵",
+      "潜深",
+      "导水舌"
+    ],
+    "species_scope": "largemouth_bass_source_context",
+    "review_status": "source_checked_not_expert_validated",
+    "version": "0.2",
+    "accessed_on": "2026-09-21"
+  },
+  {
+    "id": "K013",
+    "title": "水面饵时段参考",
+    "source_ids": [
+      "S04"
+    ],
+    "locator": "Tackle and Bait",
+    "claim": "该指南把清晨与下午较晚时段列为水面饵较适用的时段。",
+    "topic": "technique",
+    "applicability": "佛州作钓建议；非普遍效果定律",
+    "application_note": "只能作为尝试选项，不输出全天统一排名。",
+    "application_note_type": "project_inference",
+    "tags": [
+      "水面饵",
+      "早晚",
+      "topwater"
+    ],
+    "species_scope": "largemouth_bass_source_context",
+    "review_status": "source_checked_not_expert_validated",
+    "version": "0.2",
+    "accessed_on": "2026-09-21"
+  },
+  {
+    "id": "K014",
+    "title": "颜色不设唯一答案",
+    "source_ids": [
+      "S04"
+    ],
+    "locator": "Tackle and Bait",
+    "claim": "该指南提醒拟饵颜色偏好可能随光照条件变化。",
+    "topic": "technique",
+    "applicability": "经验性指导，无通用获胜颜色",
+    "application_note": "不根据单一水色断言某颜色最佳。",
+    "application_note_type": "project_inference",
+    "tags": [
+      "颜色",
+      "光照",
+      "浑水",
+      "拟饵"
+    ],
+    "species_scope": "largemouth_bass_source_context",
+    "review_status": "source_checked_not_expert_validated",
+    "version": "0.2",
+    "accessed_on": "2026-09-21"
+  },
+  {
+    "id": "K015",
+    "title": "冷暖水与溶氧",
+    "source_ids": [
+      "S05"
+    ],
+    "locator": "Dissolved oxygen, temperature, and aquatic life",
+    "claim": "其他条件相近时，冷水比暖水能容纳更多溶解氧。",
+    "topic": "water_science",
+    "applicability": "一般物理性质，不是实测 DO",
+    "application_note": "温度不能单独决定现场溶氧或中鱼率。",
+    "application_note_type": "project_inference",
+    "tags": [
+      "溶氧",
+      "高温",
+      "冷水",
+      "氧气"
+    ],
+    "species_scope": "not_species_specific",
+    "review_status": "source_checked_not_expert_validated",
+    "version": "0.2",
+    "accessed_on": "2026-09-21"
+  },
+  {
+    "id": "K016",
+    "title": "深水不一定更适宜",
+    "source_ids": [
+      "S05"
+    ],
+    "locator": "Dissolved oxygen and water quality",
+    "claim": "部分湖泊可能出现表层偏暖、底层缺氧的情况。",
+    "topic": "water_science",
+    "applicability": "条件性湖泊案例",
+    "application_note": "不能机械推荐越深越好；需要当地垂向观测。",
+    "application_note_type": "project_inference",
+    "tags": [
+      "深水",
+      "缺氧",
+      "分层",
+      "夏季"
+    ],
+    "species_scope": "not_species_specific",
+    "review_status": "source_checked_not_expert_validated",
+    "version": "0.2",
+    "accessed_on": "2026-09-21"
+  },
+  {
+    "id": "K017",
+    "title": "溶氧需要观测",
+    "source_ids": [
+      "S05"
+    ],
+    "locator": "Measuring dissolved oxygen",
+    "claim": "溶氧可用水质仪器测量，并需考虑温度校准。",
+    "topic": "water_science",
+    "applicability": "测量原理",
+    "application_note": "没有数据时保留未知，不从照片或天气生成 mg/L。",
+    "application_note_type": "project_inference",
+    "tags": [
+      "溶氧",
+      "测量",
+      "传感器"
+    ],
+    "species_scope": "not_species_specific",
+    "review_status": "source_checked_not_expert_validated",
+    "version": "0.2",
+    "accessed_on": "2026-09-21"
+  },
+  {
+    "id": "K018",
+    "title": "水温影响生物",
+    "source_ids": [
+      "S06"
+    ],
+    "locator": "Significance of water temperature",
+    "claim": "水温影响水生生物活动与生长，不同生物具有不同适温范围。",
+    "topic": "water_science",
+    "applicability": "一般生态背景",
+    "application_note": "未收录目标鱼种阈值，不输出精确最佳温度。",
+    "application_note_type": "project_inference",
+    "tags": [
+      "水温",
+      "活性",
+      "温度"
+    ],
+    "species_scope": "not_species_specific",
+    "review_status": "source_checked_not_expert_validated",
+    "version": "0.2",
+    "accessed_on": "2026-09-21"
+  },
+  {
+    "id": "K019",
+    "title": "同湖不同深度的温度",
+    "source_ids": [
+      "S06"
+    ],
+    "locator": "lake stratification discussion",
+    "claim": "湖泊可能发生垂向温度分层，表层与深层温度不同。",
+    "topic": "water_science",
+    "applicability": "不是所有淡水都持续分层",
+    "application_note": "水温记录需附位置、深度和时间；气温另列。",
+    "application_note_type": "project_inference",
+    "tags": [
+      "表层",
+      "深层",
+      "分层",
+      "水温"
+    ],
+    "species_scope": "not_species_specific",
+    "review_status": "source_checked_not_expert_validated",
+    "version": "0.2",
+    "accessed_on": "2026-09-21"
+  },
+  {
+    "id": "K020",
+    "title": "侧线感知",
+    "source_ids": [
+      "S07"
+    ],
+    "locator": "External Fish Anatomy; Internal Fish Anatomy",
+    "claim": "侧线可感知水中运动和振动等信号。",
+    "topic": "sensory",
+    "applicability": "通用鱼类知识",
+    "application_note": "不能由此推出振动越大越好或某拟饵必胜。",
+    "application_note_type": "project_inference",
+    "tags": [
+      "侧线",
+      "振动",
+      "感知"
+    ],
+    "species_scope": "not_species_specific",
+    "review_status": "source_checked_not_expert_validated",
+    "version": "0.2",
+    "accessed_on": "2026-09-21"
+  },
+  {
+    "id": "K021",
+    "title": "天气字段",
+    "source_ids": [
+      "S08"
+    ],
+    "locator": "Hourly Weather Variables",
+    "claim": "天气接口提供近地气温、降水、风等气象变量。",
+    "topic": "tool",
+    "applicability": "接口文档，不是水质接口",
+    "application_note": "气温、水温分列；请求和保存单位。",
+    "application_note_type": "project_inference",
+    "tags": [
+      "天气",
+      "气温",
+      "风",
+      "降水"
+    ],
+    "species_scope": "not_species_specific",
+    "review_status": "source_checked_not_expert_validated",
+    "version": "0.2",
+    "accessed_on": "2026-09-21"
+  },
+  {
+    "id": "K022",
+    "title": "当前天气的性质",
+    "source_ids": [
+      "S08"
+    ],
+    "locator": "Current Weather; Data Sources",
+    "claim": "其当前条件来自气象模型数据，不等同于钓点传感器现场实测。",
+    "topic": "tool",
+    "applicability": "具体覆盖和字段需集成测试",
+    "application_note": "展示位置、有效时间、获取时间和模型来源。",
+    "application_note_type": "project_inference",
+    "tags": [
+      "实时",
+      "预报",
+      "模型",
+      "天气"
+    ],
+    "species_scope": "not_species_specific",
+    "review_status": "source_checked_not_expert_validated",
+    "version": "0.2",
+    "accessed_on": "2026-09-21"
+  }
+]
