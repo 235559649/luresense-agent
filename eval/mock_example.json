@@ -1,0 +1,143 @@
+{
+  "query": "大口黑鲈吃什么？",
+  "mode": "mock",
+  "synthetic": true,
+  "model_called": false,
+  "model": null,
+  "usage": {},
+  "retrieved_ids": [
+    "K004",
+    "K012"
+  ],
+  "validation_scope": "仅JSON与引用ID合法性；语义支持须人工核对",
+  "status": "answered",
+  "claims": [
+    {
+      "text": "成鱼主要捕食其他鱼类及螯虾等较大无脊椎动物。 适用条件：成鱼；不套用于幼鱼",
+      "evidence_ids": [
+        "K004"
+      ]
+    },
+    {
+      "text": "摇滚饵常模拟饵鱼或螯虾，导水舌设计影响潜深。 适用条件：同指南区域，具体产品参数另查",
+      "evidence_ids": [
+        "K012"
+      ]
+    }
+  ],
+  "followup_question": null,
+  "evidence": [
+    {
+      "card": {
+        "id": "K004",
+        "title": "成鱼食物",
+        "source_ids": [
+          "S01"
+        ],
+        "locator": "Life History",
+        "claim": "成鱼主要捕食其他鱼类及螯虾等较大无脊椎动物。",
+        "topic": "feeding",
+        "applicability": "成鱼；不套用于幼鱼",
+        "application_note": "可询问是否观察到饵鱼；食物资料不能证明现场存在饵鱼。",
+        "application_note_type": "project_inference",
+        "tags": [
+          "食物",
+          "饵鱼",
+          "螯虾",
+          "捕食"
+        ],
+        "species_scope": "largemouth_bass_source_context",
+        "review_status": "source_checked_not_expert_validated",
+        "version": "0.2",
+        "accessed_on": "2026-09-21"
+      },
+      "matched_terms": [
+        "捕食",
+        "螯虾",
+        "食物",
+        "饵鱼"
+      ],
+      "sources": [
+        {
+          "id": "S01",
+          "title": "Largemouth Bass (Micropterus salmoides)",
+          "publisher": "Texas Parks and Wildlife Department",
+          "url": "https://tpwd.texas.gov/huntwild/wild/species/lmb/",
+          "accessed_on": "2026-09-21",
+          "publication_date": null,
+          "evidence_type": "official_species_profile",
+          "geographic_scope": "美国得克萨斯；旧分类语境",
+          "locator": "Life History; Habitat",
+          "intended_use": "栖息掩护与成鱼食性；月份、水温示例保留得州条件",
+          "limitations": "页面沿用旧学名与亚种表述；不用于确定最新分类。",
+          "verification_status": "正文相关段落已阅读；未做生态专家复核",
+          "reuse": "只保存自写短摘要与链接，不复制全文或图片",
+          "source_taxon": "Micropterus salmoides; page retains subspecies framing"
+        }
+      ]
+    },
+    {
+      "card": {
+        "id": "K012",
+        "title": "摇滚饵潜深",
+        "source_ids": [
+          "S04"
+        ],
+        "locator": "Tackle and Bait",
+        "claim": "摇滚饵常模拟饵鱼或螯虾，导水舌设计影响潜深。",
+        "topic": "technique",
+        "applicability": "同指南区域，具体产品参数另查",
+        "application_note": "选饵需结合已知水深及产品信息，不猜具体型号潜深。",
+        "application_note_type": "project_inference",
+        "tags": [
+          "crankbait",
+          "摇滚饵",
+          "潜深",
+          "导水舌"
+        ],
+        "species_scope": "largemouth_bass_source_context",
+        "review_status": "source_checked_not_expert_validated",
+        "version": "0.2",
+        "accessed_on": "2026-09-21"
+      },
+      "matched_terms": [
+        "螯虾",
+        "饵鱼"
+      ],
+      "sources": [
+        {
+          "id": "S04",
+          "title": "Black Bass Fishing",
+          "publisher": "Florida Fish and Wildlife Conservation Commission",
+          "url": "https://myfwc.com/fishing/freshwater/sites-forecasts/black-bass/",
+          "accessed_on": "2026-09-21",
+          "publication_date": null,
+          "evidence_type": "official_angling_guidance",
+          "geographic_scope": "美国佛罗里达黑鲈作钓；旧名/混合语境",
+          "locator": "Tackle and Bait",
+          "intended_use": "软虫、防挂钓组、摇滚饵与水面饵入门参考",
+          "limitations": "属于区域作钓指导，不是对照实验；对目标物种的策略仅作为可试假设。",
+          "verification_status": "正文相关段落已阅读；未做生态专家复核",
+          "reuse": "只保存自写短摘要与链接，不复制全文或图片",
+          "source_taxon": "Florida black bass guidance; common names and historical context"
+        }
+      ]
+    }
+  ],
+  "elapsed_seconds": 0.0003,
+  "prompt_sha256": "074423fe9afadf012e14f71382ae75f860ddb8cf9e397061da4377ef4845a888",
+  "knowledge_sha256": "76435a1dc22a59dc53acf5b0e4235ffb24c97a5d6008a9960d17b9d3fef1f909",
+  "sources_sha256": "811324daa5a4e538d83a8668ac1df924b6b538811aedcc33723cd4d07921a652",
+  "app_version": "0.2",
+  "recorded_at_utc": "2026-09-22T08:25:07.191043+00:00",
+  "request_settings": {
+    "max_completion_tokens": 1200,
+    "response_format": "json_object",
+    "temperature": "provider_default"
+  },
+  "code_sha256": {
+    "retriever.py": "6fc312d4ec7f0df638547c17fe05f1c26894447d22a6e156b16f4824d1c4b435",
+    "rag.py": "095f1c459fe461f272d53b804a8d8486fd4a38867e05d6c5ad8e261416bfcdd3",
+    "llm.py": "2a26cd3e7a472c2abc78abd657334b422b3529f97d31b8de13863f85de30182e"
+  }
+}

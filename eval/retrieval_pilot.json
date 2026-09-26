@@ -1,0 +1,75 @@
+{
+  "kind": "retrieval_only_development_pilot",
+  "not_model_or_field_evaluation": true,
+  "evaluated_cases": 6,
+  "skipped_cases": 4,
+  "mean_reference_coverage_at_4": 0.8333333333333334,
+  "rows": [
+    {
+      "id": "D01",
+      "expected": [
+        "K003"
+      ],
+      "retrieved": [
+        "K003",
+        "K011"
+      ],
+      "reference_coverage_at_4": 1.0
+    },
+    {
+      "id": "D02",
+      "expected": [
+        "K004"
+      ],
+      "retrieved": [
+        "K004",
+        "K012"
+      ],
+      "reference_coverage_at_4": 1.0
+    },
+    {
+      "id": "D03",
+      "expected": [
+        "K007"
+      ],
+      "retrieved": [
+        "K007",
+        "K013"
+      ],
+      "reference_coverage_at_4": 1.0
+    },
+    {
+      "id": "D04",
+      "expected": [
+        "K003",
+        "K005"
+      ],
+      "retrieved": [],
+      "reference_coverage_at_4": 0.0
+    },
+    {
+      "id": "D05",
+      "expected": [
+        "K019",
+        "K021"
+      ],
+      "retrieved": [
+        "K008",
+        "K018",
+        "K019",
+        "K021"
+      ],
+      "reference_coverage_at_4": 1.0
+    },
+    {
+      "id": "D08",
+      "expected": [
+        "K012"
+      ],
+      "retrieved": [
+        "K012"
+      ],
+      "reference_coverage_at_4": 1.0
+    }
+  ]
+}

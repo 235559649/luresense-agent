@@ -1,0 +1,140 @@
+{
+  "query": "气温能代替水温吗？",
+  "mode": "mock",
+  "synthetic": true,
+  "model_called": false,
+  "model": null,
+  "usage": {},
+  "retrieved_ids": [
+    "K008",
+    "K018",
+    "K019",
+    "K021"
+  ],
+  "validation_scope": "仅JSON与引用ID合法性；语义支持须人工核对",
+  "status": "answered",
+  "claims": [
+    {
+      "text": "得州资料以约 60°F 水温描述春季繁殖启动，并说明州内月份有差异。 适用条件：美国得州；约 15.6°C 是换算，不是通用阈值",
+      "evidence_ids": [
+        "K008"
+      ]
+    },
+    {
+      "text": "水温影响水生生物活动与生长，不同生物具有不同适温范围。 适用条件：一般生态背景",
+      "evidence_ids": [
+        "K018"
+      ]
+    }
+  ],
+  "followup_question": null,
+  "evidence": [
+    {
+      "card": {
+        "id": "K008",
+        "title": "繁殖信息需要地域",
+        "source_ids": [
+          "S01"
+        ],
+        "locator": "Life History",
+        "claim": "得州资料以约 60°F 水温描述春季繁殖启动，并说明州内月份有差异。",
+        "topic": "season",
+        "applicability": "美国得州；约 15.6°C 是换算，不是通用阈值",
+        "application_note": "不能据此判定中国或新加坡当下处于繁殖期。",
+        "application_note_type": "project_inference",
+        "tags": [
+          "繁殖",
+          "季节",
+          "春季",
+          "水温"
+        ],
+        "species_scope": "largemouth_bass_source_context",
+        "review_status": "source_checked_not_expert_validated",
+        "version": "0.2",
+        "accessed_on": "2026-09-21"
+      },
+      "matched_terms": [
+        "水温"
+      ],
+      "sources": [
+        {
+          "id": "S01",
+          "title": "Largemouth Bass (Micropterus salmoides)",
+          "publisher": "Texas Parks and Wildlife Department",
+          "url": "https://tpwd.texas.gov/huntwild/wild/species/lmb/",
+          "accessed_on": "2026-09-21",
+          "publication_date": null,
+          "evidence_type": "official_species_profile",
+          "geographic_scope": "美国得克萨斯；旧分类语境",
+          "locator": "Life History; Habitat",
+          "intended_use": "栖息掩护与成鱼食性；月份、水温示例保留得州条件",
+          "limitations": "页面沿用旧学名与亚种表述；不用于确定最新分类。",
+          "verification_status": "正文相关段落已阅读；未做生态专家复核",
+          "reuse": "只保存自写短摘要与链接，不复制全文或图片",
+          "source_taxon": "Micropterus salmoides; page retains subspecies framing"
+        }
+      ]
+    },
+    {
+      "card": {
+        "id": "K018",
+        "title": "水温影响生物",
+        "source_ids": [
+          "S06"
+        ],
+        "locator": "Significance of water temperature",
+        "claim": "水温影响水生生物活动与生长，不同生物具有不同适温范围。",
+        "topic": "water_science",
+        "applicability": "一般生态背景",
+        "application_note": "未收录目标鱼种阈值，不输出精确最佳温度。",
+        "application_note_type": "project_inference",
+        "tags": [
+          "水温",
+          "活性",
+          "温度"
+        ],
+        "species_scope": "not_species_specific",
+        "review_status": "source_checked_not_expert_validated",
+        "version": "0.2",
+        "accessed_on": "2026-09-21"
+      },
+      "matched_terms": [
+        "水温"
+      ],
+      "sources": [
+        {
+          "id": "S06",
+          "title": "Temperature and Water",
+          "publisher": "U.S. Geological Survey",
+          "url": "https://www.usgs.gov/water-science-school/science/temperature-and-water",
+          "accessed_on": "2026-09-21",
+          "publication_date": null,
+          "evidence_type": "official_water_science",
+          "geographic_scope": "一般水科学；湖泊分层案例有地域性",
+          "locator": "Significance of water temperature; lake stratification discussion",
+          "intended_use": "水温的生物学意义、垂向差异",
+          "limitations": "不从案例月份推断任意水域当前已发生分层。",
+          "verification_status": "正文相关段落已阅读；未做生态专家复核",
+          "reuse": "只保存自写短摘要与链接，不复制全文或图片",
+          "source_taxon": null
+        }
+      ]
+    }
+  ],
+  "elapsed_seconds": 0.0003,
+  "prompt_sha256": "074423fe9afadf012e14f71382ae75f860ddb8cf9e397061da4377ef4845a888",
+  "knowledge_sha256": "76435a1dc22a59dc53acf5b0e4235ffb24c97a5d6008a9960d17b9d3fef1f909",
+  "sources_sha256": "811324daa5a4e538d83a8668ac1df924b6b538811aedcc33723cd4d07921a652",
+  "app_version": "0.2",
+  "recorded_at_utc": "2026-09-26T11:29:38.858940+00:00",
+  "request_settings": {
+    "max_completion_tokens": 1200,
+    "response_format": "json_object",
+    "temperature": "provider_default"
+  },
+  "code_sha256": {
+    "retriever.py": "6fc312d4ec7f0df638547c17fe05f1c26894447d22a6e156b16f4824d1c4b435",
+    "rag.py": "095f1c459fe461f272d53b804a8d8486fd4a38867e05d6c5ad8e261416bfcdd3",
+    "llm.py": "2a26cd3e7a472c2abc78abd657334b422b3529f97d31b8de13863f85de30182e"
+  }
+}
