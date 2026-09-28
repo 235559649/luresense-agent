@@ -1,4 +1,4 @@
-"""v0.3-step2 entry, additive to the v0.2 project; no third-party packages."""
+"""v0.3-step3 entry, additive to the v0.2 project; no third-party packages."""
 import argparse
 import getpass
 import json
@@ -11,7 +11,7 @@ from retriever import KnowledgeBase
 
 
 def main():
-    parser = argparse.ArgumentParser(description='LureSense 条件化回答 v0.3-step2')
+    parser = argparse.ArgumentParser(description='LureSense 条件化回答 v0.3-step3')
     parser.add_argument('--mode', choices=('mock', 'rag'), default='mock')
     parser.add_argument('--query', default='我在淡水边，应该先看哪里？')
     parser.add_argument('--model', default=os.getenv('MODEL_NAME', ''))
@@ -36,7 +36,7 @@ def main():
             client = ChatClient(args.model, key, args.base_url)
         return client
 
-    print('【v0.3-step2】规则路由与有限澄清；自然语言识别有边界。用户信息未经实测验证。')
+    print('【v0.3-step3】规则路由与有限澄清；自然语言识别有边界。用户信息未经实测验证。')
     print('条件有误时可修改；两项自动追问上限，每个会话最多3次模型请求（含失败）。')
     dirty = True
     try:
@@ -87,7 +87,7 @@ def main():
         if destination:
             sessions.append(session_record(current, kb))
             with destination.open('x', encoding='utf-8') as handle:
-                json.dump({'app_version': '0.3-step2', 'sessions': sessions}, handle, ensure_ascii=False, indent=2)
+                json.dump({'app_version': '0.3-step3', 'sessions': sessions}, handle, ensure_ascii=False, indent=2)
             print('会话记录已保存：' + str(destination))
 
 

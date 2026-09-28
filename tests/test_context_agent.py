@@ -18,7 +18,8 @@ class FakeClient:
             raise ModelError(self.error)
         card = json.loads(messages[1]['content'])['evidence'][0]
         return json.dumps({'status': 'answered', 'claims': [
-            {'text': card['claim'], 'evidence_ids': ['FAKE' if self.bad_ref else card['id']]}],
+            {'kind': 'source_fact', 'text': card['claim'], 'evidence_ids': ['FAKE' if self.bad_ref else card['id']],
+             'anchors': [{'card_id': card['id'], 'field': 'claim', 'quote': card['claim'][:180]}], 'caveat': None}],
             'followup_question': '再问一个？' if self.extra_question else None}), {'total_tokens': 20}
 
 
