@@ -39,6 +39,29 @@ def normalize(text: str) -> str:
     return unicodedata.normalize("NFKC", text).casefold().strip()
 
 
+def has_out_of_scope(text: str) -> bool:
+    """Ignore only complete, explicit negative clauses; ambiguity stays blocked.
+
+    This is a bounded Chinese rule, not general negation understanding. Every
+    occurrence is checked, so one negated mention cannot hide a positive one.
+    Keep this helper shared by routing and retrieval.
+    """
+    q = normalize(text)
+    subject = r"(?:我|我们|这里|当前位置|目标|目标鱼种)?"
+    negation = r"(?:并不是|不是|并非|并不在|不在)(?:在|位于)?"
+    for clause in re.split(r"[，,。；;！!\n]", q):
+        compact = re.sub(r"\s+", "", clause)
+        for word in OUT_OF_SCOPE:
+            if word not in compact:
+                continue
+            # Full-clause match deliberately excludes questions, double
+            # negatives, comparisons and embedded/compound uses of the term.
+            pattern = subject + negation + re.escape(word) + r"(?:钓鱼|垂钓)?"
+            if re.fullmatch(pattern, compact) is None:
+                return True
+    return False
+
+
 class KnowledgeBase:
     def __init__(self, data_dir: Path = DATA_DIR):
         self.cards = json.loads((data_dir / "knowledge_cards.json").read_text(encoding="utf-8"))
@@ -70,8 +93,8 @@ class KnowledgeBase:
         q = normalize(query)
         base = {"query": query, "mode": "local_keyword_retrieval", "results": [],
                 "notice": "本工具只检索资料，不判断现场是否有鱼，不生成中鱼概率。"}
-        # 保守的范围检查：比较性问题也可能触发，属于本版本已知限制。
-        if any(word in q for word in OUT_OF_SCOPE):
+        # 比较性、疑问和复杂否定仍保守拦截；明确否定由共用规则处理。
+        if has_out_of_scope(q):
             return {**base, "status": "out_of_scope", "message": "当前仅支持大口黑鲈淡水资料；问题包含其他鱼种或水域，请明确范围。"}
 
         concepts = [terms for terms in CONCEPTS.values() if any(t in q for t in terms)]

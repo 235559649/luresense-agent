@@ -1,0 +1,64 @@
+# LureSense 检索与状态实验
+
+**离线结果；没有调用模型，不表示回答正确率或钓鱼效果。**
+
+情景数：20；划分：dev；数据哈希：`f8f22c345b24e7bbb6ca043dcbbf52fd02f57796305aaa12c69221feb32d53fc`。
+
+标注为项目作者拟定的待复核卡片集合；challenge 是压力测试，不是独立盲测。
+
+| 方法 | Hit@4 | Recall@4 | MRR@4 | 负例空检索率 | 失效词移除率 | 状态匹配率 |
+| --- | --- | --- | --- | --- | --- | --- |
+| direct | 0.667 (n=12) | 0.611 (n=12) | 0.486 (n=12) | 0.875 (n=8) | 0.000 (n=3) | — (n=0) |
+| append_context | 1.000 (n=12) | 0.903 (n=12) | 0.861 (n=12) | 0.625 (n=8) | 0.000 (n=3) | — (n=0) |
+| agent_state | 1.000 (n=12) | 0.917 (n=12) | 0.833 (n=12) | 1.000 (n=8) | 1.000 (n=3) | 1.000 (n=10) |
+
+## 如何解释
+
+- direct 只获得原问题；其他两组获得补充条件。与 direct 的差异同时包含信息增益，不能单独归因于算法。
+- append_context 将原问题与最终条件拼接；agent_state 按状态重写查询。此对照用于观察原问题失效词的影响。
+- 拼接基线中的字段名本身也可能命中检索词；差异包含序列化方式的影响，不是独立因果实验。
+- 状态匹配只对 agent_state 适用；没有状态的基线不计零分。所有指标只用适用案例作分母。
+- Recall@4 只对已标注相关卡计算；卡片集合不是穷尽标注，因此不计算 Precision。
+- 负例空检索率衡量检索门控，不衡量模型是否恰当拒答。相关主题卡片存在也不保证具体结论可回答。
+- 仅评估修正后的最终状态；原有单元测试另覆盖多轮历史。离线运行无网络耗时和模型费用指标。
+
+## 失败与部分召回（全部保留）
+
+| 案例 | 方法 | 类别 | 问题 | 召回 ID | 未满足项 |
+| --- | --- | --- | --- | --- | --- |
+| S06 | direct | vague | 我在淡水边，应该先看哪里？ | 空 | hit_at_4, recall_at_4 |
+| S07 | direct | vague | 我现在应该怎么选钓位？ | 空 | hit_at_4, recall_at_4 |
+| S08 | direct | vague | 新手应该先找哪里？ | 空 | hit_at_4, recall_at_4 |
+| S08 | append_context | vague | 新手应该先找哪里？ | K003, K011 | recall_at_4 |
+| S08 | agent_state | vague | 新手应该先找哪里？ | K003, K011 | recall_at_4 |
+| S09 | direct | vague | 我在湖边，应该观察什么？ | 空 | hit_at_4, recall_at_4 |
+| S10 | append_context | unknown | 我在淡水边，应该先看哪里？ | K003, K011 | empty_on_negative |
+| S11 | append_context | unknown | 我不知道哪里钓合适。 | K003, K011 | empty_on_negative |
+| S12 | direct | correction | 我在湖泊，看到水草和倒木，应该先看哪里？ | K003, K010, K005, K011 | stale_query_clean |
+| S12 | append_context | correction | 我在湖泊，看到水草和倒木，应该先看哪里？ | K003, K010, K005, K011 | stale_query_clean |
+| S13 | direct | correction | 我在湖泊，看到水草，怎么选钓位？ | K010, K003, K005, K016 | stale_query_clean |
+| S13 | append_context | correction | 我在湖泊，看到水草，怎么选钓位？ | K003, K010, K005, K011 | stale_query_clean |
+| S13 | agent_state | correction | 我在湖泊，看到水草，怎么选钓位？ | K003, K011 | recall_at_4 |
+| S14 | direct | correction | 我在水库，看到倒木，哪里钓？ | K003, K005, K010, K011 | empty_on_negative, stale_query_clean |
+| S14 | append_context | correction | 我在水库，看到倒木，哪里钓？ | K003, K005, K010, K011 | empty_on_negative, stale_query_clean |
+| S20 | direct | temperature | 今天温度28度。 | K018 | recall_at_4 |
+| S20 | append_context | temperature | 今天温度28度。 | K018 | recall_at_4 |
+
+## 可追溯信息
+
+```json
+{
+  "python": "3.11.5",
+  "knowledge_sha256": "76435a1dc22a59dc53acf5b0e4235ffb24c97a5d6008a9960d17b9d3fef1f909",
+  "sources_sha256": "811324daa5a4e538d83a8668ac1df924b6b538811aedcc33723cd4d07921a652",
+  "label_status": "draft_author_labels_not_expert_validated",
+  "code_sha256": {
+    "benchmark_v05.py": "1497d57dc0c704d2e3e3b39843d1ea38cb09ee21e71b1f038e022c188995dbec",
+    "retriever.py": "b19ea2c303d284b334e762cff70e9cd8c1b4086a1eb5295f72a205ef29ef1252",
+    "context_agent.py": "02c29cf23b40bd9fdb2f3b4225de0c7d82f28c041629f0a54333849f94918a51",
+    "grounding.py": "0c63ce217fcf5bd9a1b90a02436f4aa62267df1bcbfcae25905afe97ffc82e81",
+    "llm.py": "2a26cd3e7a472c2abc78abd657334b422b3529f97d31b8de13863f85de30182e",
+    "agent_v03.py": "54ec1c48e0892ed9a39f1c53688e20c5a394666b6502c6b4add55a7c4ec5a934"
+  }
+}
+```

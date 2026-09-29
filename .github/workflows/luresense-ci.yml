@@ -1,0 +1,27 @@
+name: LureSense offline checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      matrix:
+        python-version: ['3.11', '3.12']
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run regression tests without model credentials
+        run: python -m unittest discover -s tests -v
+      - name: Run development scenarios
+        run: python benchmark_v05.py --split dev --out ci-benchmark
+      - name: Add experiment report to workflow summary
+        run: cat ci-benchmark/REPORT.md >> "$GITHUB_STEP_SUMMARY"

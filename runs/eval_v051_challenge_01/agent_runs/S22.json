@@ -1,0 +1,228 @@
+{
+  "app_version": "0.3-step3",
+  "recorded_at_utc": "2026-09-29T06:30:27.918691+00:00",
+  "question": "摇滚饵导水舌与潜深有什么关系？",
+  "task": "knowledge",
+  "context": {
+    "waterbody": {
+      "value": null,
+      "status": "unanswered",
+      "source": null,
+      "verified": false,
+      "corrected": false
+    },
+    "cover": {
+      "value": null,
+      "status": "unanswered",
+      "source": null,
+      "verified": false,
+      "corrected": false
+    },
+    "temperature_source": {
+      "value": null,
+      "status": "unanswered",
+      "source": null,
+      "verified": false,
+      "corrected": false
+    }
+  },
+  "questions_asked": 0,
+  "model_requests": 0,
+  "events": [
+    {
+      "event": "start",
+      "task": "knowledge",
+      "context": {
+        "waterbody": {
+          "value": null,
+          "status": "unanswered",
+          "source": null,
+          "verified": false,
+          "corrected": false
+        },
+        "cover": {
+          "value": null,
+          "status": "unanswered",
+          "source": null,
+          "verified": false,
+          "corrected": false
+        },
+        "temperature_source": {
+          "value": null,
+          "status": "unanswered",
+          "source": null,
+          "verified": false,
+          "corrected": false
+        }
+      }
+    },
+    {
+      "event": "response",
+      "result": {
+        "mode": "mock",
+        "synthetic": true,
+        "original_question": "摇滚饵导水舌与潜深有什么关系？",
+        "task": "knowledge",
+        "current_context": {
+          "waterbody": {
+            "value": null,
+            "status": "unanswered",
+            "source": null,
+            "verified": false,
+            "corrected": false
+          },
+          "cover": {
+            "value": null,
+            "status": "unanswered",
+            "source": null,
+            "verified": false,
+            "corrected": false
+          },
+          "temperature_source": {
+            "value": null,
+            "status": "unanswered",
+            "source": null,
+            "verified": false,
+            "corrected": false
+          }
+        },
+        "retrieval_query": "摇滚饵导水舌与潜深有什么关系？",
+        "retrieved_ids": [
+          "K012"
+        ],
+        "claims": [],
+        "evidence": [
+          {
+            "card": {
+              "id": "K012",
+              "title": "摇滚饵潜深",
+              "source_ids": [
+                "S04"
+              ],
+              "locator": "Tackle and Bait",
+              "claim": "摇滚饵常模拟饵鱼或螯虾，导水舌设计影响潜深。",
+              "topic": "technique",
+              "applicability": "同指南区域，具体产品参数另查",
+              "application_note": "选饵需结合已知水深及产品信息，不猜具体型号潜深。",
+              "application_note_type": "project_inference",
+              "tags": [
+                "crankbait",
+                "摇滚饵",
+                "潜深",
+                "导水舌"
+              ],
+              "species_scope": "largemouth_bass_source_context",
+              "review_status": "source_checked_not_expert_validated",
+              "version": "0.2",
+              "accessed_on": "2026-09-21"
+            },
+            "matched_terms": [
+              "crankbait",
+              "导水舌",
+              "摇滚饵",
+              "潜深"
+            ],
+            "sources": [
+              {
+                "id": "S04",
+                "title": "Black Bass Fishing",
+                "publisher": "Florida Fish and Wildlife Conservation Commission",
+                "url": "https://myfwc.com/fishing/freshwater/sites-forecasts/black-bass/",
+                "accessed_on": "2026-09-21",
+                "publication_date": null,
+                "evidence_type": "official_angling_guidance",
+                "geographic_scope": "美国佛罗里达黑鲈作钓；旧名/混合语境",
+                "locator": "Tackle and Bait",
+                "intended_use": "软虫、防挂钓组、摇滚饵与水面饵入门参考",
+                "limitations": "属于区域作钓指导，不是对照实验；对目标物种的策略仅作为可试假设。",
+                "verification_status": "正文相关段落已阅读；未做生态专家复核",
+                "reuse": "只保存自写短摘要与链接，不复制全文或图片",
+                "source_taxon": "Florida black bass guidance; common names and historical context"
+              }
+            ]
+          }
+        ],
+        "followup_question": null,
+        "model_called": false,
+        "request_attempted": false,
+        "raw_response": null,
+        "retrieved_evidence": [
+          {
+            "card": {
+              "id": "K012",
+              "title": "摇滚饵潜深",
+              "source_ids": [
+                "S04"
+              ],
+              "locator": "Tackle and Bait",
+              "claim": "摇滚饵常模拟饵鱼或螯虾，导水舌设计影响潜深。",
+              "topic": "technique",
+              "applicability": "同指南区域，具体产品参数另查",
+              "application_note": "选饵需结合已知水深及产品信息，不猜具体型号潜深。",
+              "application_note_type": "project_inference",
+              "tags": [
+                "crankbait",
+                "摇滚饵",
+                "潜深",
+                "导水舌"
+              ],
+              "species_scope": "largemouth_bass_source_context",
+              "review_status": "source_checked_not_expert_validated",
+              "version": "0.2",
+              "accessed_on": "2026-09-21"
+            },
+            "matched_terms": [
+              "crankbait",
+              "导水舌",
+              "摇滚饵",
+              "潜深"
+            ],
+            "sources": [
+              {
+                "id": "S04",
+                "title": "Black Bass Fishing",
+                "publisher": "Florida Fish and Wildlife Conservation Commission",
+                "url": "https://myfwc.com/fishing/freshwater/sites-forecasts/black-bass/",
+                "accessed_on": "2026-09-21",
+                "publication_date": null,
+                "evidence_type": "official_angling_guidance",
+                "geographic_scope": "美国佛罗里达黑鲈作钓；旧名/混合语境",
+                "locator": "Tackle and Bait",
+                "intended_use": "软虫、防挂钓组、摇滚饵与水面饵入门参考",
+                "limitations": "属于区域作钓指导，不是对照实验；对目标物种的策略仅作为可试假设。",
+                "verification_status": "正文相关段落已阅读；未做生态专家复核",
+                "reuse": "只保存自写短摘要与链接，不复制全文或图片",
+                "source_taxon": "Florida black bass guidance; common names and historical context"
+              }
+            ]
+          }
+        ],
+        "validation_scope": "JSON结构、引用编号、类型与知识卡片段匹配；不是语义核查",
+        "model_response_received": false,
+        "usage": {},
+        "model": null,
+        "model_latency_seconds": null,
+        "scope_assumption": "淡水大口黑鲈；现场物种与地域未验证",
+        "status": "evidence_only",
+        "message": "模拟模式只展示候选资料，不生成现场建议。",
+        "elapsed_seconds": 0.0001,
+        "model_requests_in_session": 0
+      }
+    }
+  ],
+  "prompt_sha256": "2303f37f802601c478148a71765b1203123ec36a1f234cf3839eb698ebab26cb",
+  "knowledge_sha256": "76435a1dc22a59dc53acf5b0e4235ffb24c97a5d6008a9960d17b9d3fef1f909",
+  "sources_sha256": "811324daa5a4e538d83a8668ac1df924b6b538811aedcc33723cd4d07921a652",
+  "request_settings": {
+    "max_completion_tokens": 1200,
+    "response_format": "json_object",
+    "temperature": "provider_default"
+  },
+  "code_sha256": {
+    "context_agent.py": "02c29cf23b40bd9fdb2f3b4225de0c7d82f28c041629f0a54333849f94918a51",
+    "agent_v03.py": "54ec1c48e0892ed9a39f1c53688e20c5a394666b6502c6b4add55a7c4ec5a934",
+    "retriever.py": "b19ea2c303d284b334e762cff70e9cd8c1b4086a1eb5295f72a205ef29ef1252",
+    "llm.py": "2a26cd3e7a472c2abc78abd657334b422b3529f97d31b8de13863f85de30182e",
+    "grounding.py": "0c63ce217fcf5bd9a1b90a02436f4aa62267df1bcbfcae25905afe97ffc82e81"
+  }
+}

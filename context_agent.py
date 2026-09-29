@@ -10,7 +10,7 @@ from time import perf_counter
 
 from llm import ModelError
 from grounding import validate_grounded, OUTPUT_INSTRUCTION
-from retriever import OUT_OF_SCOPE, normalize
+from retriever import has_out_of_scope, normalize
 
 OPTIONS = {
     'waterbody': {'1': '湖泊', '2': '水库', '3': '河流', '4': '池塘', '0': None},
@@ -45,7 +45,7 @@ SYSTEM_PROMPT += OUTPUT_INSTRUCTION
 
 def route(question):
     q = normalize(question)
-    if any(word in q for word in OUT_OF_SCOPE):
+    if has_out_of_scope(q):
         return 'out_of_scope'
     # Conceptual comparisons do not need a survey of the user's fishing site.
     if any(word in q for word in ('代替', '区别', '是什么', '吃什么', '吃啥', '食性', '为什么')):

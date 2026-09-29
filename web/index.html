@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LureSense · 淡水路亚助手</title><link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script></head>
+<body>
+<header><a class="brand" href="/">LureSense<span>淡水路亚 · 证据辅助决策</span></a><span id="mode" class="badge">连接中</span></header>
+<main>
+<section class="intro"><p class="eyebrow">OBSERVE · ASK · VERIFY</p><h1>先了解水域，再讨论建议。</h1><p>面向大口黑鲈的知识助手。补充你知道的条件，查看建议背后的资料；不知道的，留作未知。</p></section>
+<div class="layout"><section class="primary">
+<article class="card"><div class="section-title"><h2>你想了解什么？</h2><span>01 / 提问</span></div>
+<form id="question-form"><label for="question" class="sr-only">输入问题</label><textarea id="question" maxlength="1000" rows="3" placeholder="我在淡水边，应该先看哪里？" required>我在淡水边，应该先看哪里？</textarea><div class="form-footer"><span>问题和条件会在真实模式下发送至配置的模型服务。</span><button type="submit">开始分析 →</button></div></form>
+<div class="examples"><button type="button" data-example="大口黑鲈吃什么？">食性知识</button><button type="button" data-example="我在湖泊，看到水草和倒木，应该先看哪里？">条件完整</button><button type="button" data-example="气温能直接代替水温吗？">气温与水温</button></div>
+</article>
+<div id="error" class="error" role="alert" hidden></div><p id="activity" role="status" aria-live="polite"></p>
+<article id="followup-card" class="card" hidden><div class="section-title"><h2>补充一个条件</h2><span>02 / 澄清</span></div><p id="followup-text"></p><div id="followup-options" class="options"></div></article>
+<article class="card answer"><div class="section-title"><h2>回答与依据</h2><span>03 / 核对</span></div><div id="answer"><p class="placeholder">开始一个问题后，这里会显示回答、推断限制与证据。</p></div></article>
+<article class="card"><div class="section-title"><h2>来源资料</h2><span id="evidence-count">0 条</span></div><div id="evidence"><p class="placeholder">资料会与当前回答一起展示。</p></div></article>
+</section>
+<aside>
+<article class="card"><div class="section-title"><h2>当前条件</h2><span>可修改</span></div><p class="hint">记录的是用户描述，不是现场验证。修改后可能发起一次新的模型请求。</p><div id="context"><p class="placeholder">等待提问</p></div></article>
+<article class="card"><div class="section-title"><h2>处理过程</h2><button id="export" class="secondary" disabled>导出 JSON</button></div><div id="metrics" class="metrics"></div><ol id="trace"><li>等待开始</li></ol><p class="hint">最多 2 项自动追问、每个会话 3 次模型请求。新问题开启新会话。</p></article>
+<div class="boundary"><strong>这份建议能说明什么？</strong><p>引用片段可核对，结论仍需判断。系统不能确认现场有鱼，也不预测中鱼率。页面刷新或服务重启前，请导出需要保留的记录。</p></div>
+</aside></div>
+<footer>个人研究型工程项目 · 规则澄清 + 检索增强生成 + 证据校验 + 人工评估</footer>
+</main></body></html>

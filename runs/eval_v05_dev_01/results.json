@@ -1,0 +1,2425 @@
+{
+  "schema_version": 1,
+  "experiment": "offline_retrieval_state",
+  "model_called": false,
+  "recorded_at_utc": "2026-09-28T07:27:58.568530+00:00",
+  "split": "dev",
+  "scenario_count": 20,
+  "category_counts": {
+    "knowledge": 5,
+    "vague": 4,
+    "unknown": 2,
+    "correction": 3,
+    "scope": 3,
+    "no_evidence": 2,
+    "temperature": 1
+  },
+  "dataset_sha256": "f8f22c345b24e7bbb6ca043dcbbf52fd02f57796305aaa12c69221feb32d53fc",
+  "dataset_snapshot": {
+    "schema_version": 1,
+    "label_status": "draft_author_labels_not_expert_validated",
+    "description": "30个人工构造场景，用于检索与状态回归；非现场数据，challenge也不是独立盲测集。relevant_ids是预期至少应召回的相关卡，不是穷尽相关集合。",
+    "cases": [
+      {
+        "id": "S01",
+        "split": "dev",
+        "category": "knowledge",
+        "question": "大口黑鲈吃什么？",
+        "answers": {},
+        "corrections": [],
+        "relevant_ids": [
+          "K004"
+        ],
+        "expect_no_evidence": false,
+        "expected_context": {},
+        "forbidden_query_terms": []
+      },
+      {
+        "id": "S02",
+        "split": "dev",
+        "category": "knowledge",
+        "question": "气温能直接代替水温吗？",
+        "answers": {},
+        "corrections": [],
+        "relevant_ids": [
+          "K018",
+          "K019",
+          "K021"
+        ],
+        "expect_no_evidence": false,
+        "expected_context": {},
+        "forbidden_query_terms": []
+      },
+      {
+        "id": "S03",
+        "split": "dev",
+        "category": "knowledge",
+        "question": "湖泊为什么会出现温度分层？",
+        "answers": {},
+        "corrections": [],
+        "relevant_ids": [
+          "K019"
+        ],
+        "expect_no_evidence": false,
+        "expected_context": {},
+        "forbidden_query_terms": []
+      },
+      {
+        "id": "S04",
+        "split": "dev",
+        "category": "knowledge",
+        "question": "冷水和暖水的溶氧有什么区别？",
+        "answers": {},
+        "corrections": [],
+        "relevant_ids": [
+          "K015"
+        ],
+        "expect_no_evidence": false,
+        "expected_context": {},
+        "forbidden_query_terms": []
+      },
+      {
+        "id": "S05",
+        "split": "dev",
+        "category": "knowledge",
+        "question": "侧线是什么？",
+        "answers": {},
+        "corrections": [],
+        "relevant_ids": [
+          "K020"
+        ],
+        "expect_no_evidence": false,
+        "expected_context": {},
+        "forbidden_query_terms": []
+      },
+      {
+        "id": "S06",
+        "split": "dev",
+        "category": "vague",
+        "question": "我在淡水边，应该先看哪里？",
+        "answers": {
+          "waterbody": "1",
+          "cover": "1"
+        },
+        "corrections": [],
+        "relevant_ids": [
+          "K003",
+          "K005"
+        ],
+        "expect_no_evidence": false,
+        "expected_context": {
+          "waterbody": "湖泊",
+          "cover": "水草"
+        },
+        "forbidden_query_terms": []
+      },
+      {
+        "id": "S07",
+        "split": "dev",
+        "category": "vague",
+        "question": "我现在应该怎么选钓位？",
+        "answers": {
+          "waterbody": "2",
+          "cover": "2"
+        },
+        "corrections": [],
+        "relevant_ids": [
+          "K003",
+          "K005"
+        ],
+        "expect_no_evidence": false,
+        "expected_context": {
+          "waterbody": "水库",
+          "cover": "倒木"
+        },
+        "forbidden_query_terms": []
+      },
+      {
+        "id": "S08",
+        "split": "dev",
+        "category": "vague",
+        "question": "新手应该先找哪里？",
+        "answers": {
+          "waterbody": "3",
+          "cover": "3"
+        },
+        "corrections": [],
+        "relevant_ids": [
+          "K003",
+          "K005"
+        ],
+        "expect_no_evidence": false,
+        "expected_context": {
+          "waterbody": "河流",
+          "cover": "岩石"
+        },
+        "forbidden_query_terms": []
+      },
+      {
+        "id": "S09",
+        "split": "dev",
+        "category": "vague",
+        "question": "我在湖边，应该观察什么？",
+        "answers": {
+          "cover": "4"
+        },
+        "corrections": [],
+        "relevant_ids": [
+          "K003",
+          "K005"
+        ],
+        "expect_no_evidence": false,
+        "expected_context": {
+          "waterbody": "湖泊",
+          "cover": "水草和倒木"
+        },
+        "forbidden_query_terms": []
+      },
+      {
+        "id": "S10",
+        "split": "dev",
+        "category": "unknown",
+        "question": "我在淡水边，应该先看哪里？",
+        "answers": {
+          "waterbody": "0",
+          "cover": "0"
+        },
+        "corrections": [],
+        "relevant_ids": [],
+        "expect_no_evidence": true,
+        "expected_context": {
+          "waterbody": null,
+          "cover": null
+        },
+        "forbidden_query_terms": []
+      },
+      {
+        "id": "S11",
+        "split": "dev",
+        "category": "unknown",
+        "question": "我不知道哪里钓合适。",
+        "answers": {
+          "waterbody": "0",
+          "cover": "0"
+        },
+        "corrections": [],
+        "relevant_ids": [],
+        "expect_no_evidence": true,
+        "expected_context": {
+          "waterbody": null,
+          "cover": null
+        },
+        "forbidden_query_terms": []
+      },
+      {
+        "id": "S12",
+        "split": "dev",
+        "category": "correction",
+        "question": "我在湖泊，看到水草和倒木，应该先看哪里？",
+        "answers": {},
+        "corrections": [
+          [
+            "cover",
+            "5"
+          ]
+        ],
+        "relevant_ids": [
+          "K005"
+        ],
+        "expect_no_evidence": false,
+        "expected_context": {
+          "cover": "未观察到上述结构"
+        },
+        "forbidden_query_terms": [
+          "水草",
+          "倒木"
+        ]
+      },
+      {
+        "id": "S13",
+        "split": "dev",
+        "category": "correction",
+        "question": "我在湖泊，看到水草，怎么选钓位？",
+        "answers": {},
+        "corrections": [
+          [
+            "waterbody",
+            "3"
+          ],
+          [
+            "cover",
+            "3"
+          ]
+        ],
+        "relevant_ids": [
+          "K003",
+          "K005"
+        ],
+        "expect_no_evidence": false,
+        "expected_context": {
+          "waterbody": "河流",
+          "cover": "岩石"
+        },
+        "forbidden_query_terms": [
+          "湖泊",
+          "水草"
+        ]
+      },
+      {
+        "id": "S14",
+        "split": "dev",
+        "category": "correction",
+        "question": "我在水库，看到倒木，哪里钓？",
+        "answers": {},
+        "corrections": [
+          [
+            "waterbody",
+            "0"
+          ],
+          [
+            "cover",
+            "0"
+          ]
+        ],
+        "relevant_ids": [],
+        "expect_no_evidence": true,
+        "expected_context": {
+          "waterbody": null,
+          "cover": null
+        },
+        "forbidden_query_terms": [
+          "水库",
+          "倒木"
+        ]
+      },
+      {
+        "id": "S15",
+        "split": "dev",
+        "category": "scope",
+        "question": "海边花鲈怎么钓？",
+        "answers": {},
+        "corrections": [],
+        "relevant_ids": [],
+        "expect_no_evidence": true,
+        "expected_context": {},
+        "forbidden_query_terms": []
+      },
+      {
+        "id": "S16",
+        "split": "dev",
+        "category": "scope",
+        "question": "小口黑鲈吃什么？",
+        "answers": {},
+        "corrections": [],
+        "relevant_ids": [],
+        "expect_no_evidence": true,
+        "expected_context": {},
+        "forbidden_query_terms": []
+      },
+      {
+        "id": "S17",
+        "split": "dev",
+        "category": "scope",
+        "question": "孔雀鲈用什么饵？",
+        "answers": {},
+        "corrections": [],
+        "relevant_ids": [],
+        "expect_no_evidence": true,
+        "expected_context": {},
+        "forbidden_query_terms": []
+      },
+      {
+        "id": "S18",
+        "split": "dev",
+        "category": "no_evidence",
+        "question": "请给出量子计算硬件纠错方案。",
+        "answers": {},
+        "corrections": [],
+        "relevant_ids": [],
+        "expect_no_evidence": true,
+        "expected_context": {},
+        "forbidden_query_terms": []
+      },
+      {
+        "id": "S19",
+        "split": "dev",
+        "category": "no_evidence",
+        "question": "这片水域的确切鱼类数量是多少？",
+        "answers": {},
+        "corrections": [],
+        "relevant_ids": [],
+        "expect_no_evidence": true,
+        "expected_context": {},
+        "forbidden_query_terms": []
+      },
+      {
+        "id": "S20",
+        "split": "dev",
+        "category": "temperature",
+        "question": "今天温度28度。",
+        "answers": {
+          "temperature_source": "0"
+        },
+        "corrections": [],
+        "relevant_ids": [
+          "K018",
+          "K019",
+          "K021"
+        ],
+        "expect_no_evidence": false,
+        "expected_context": {
+          "temperature_source": null
+        },
+        "forbidden_query_terms": []
+      },
+      {
+        "id": "S21",
+        "split": "challenge",
+        "category": "knowledge",
+        "question": "拟饵的颜色是否存在唯一最佳答案？",
+        "answers": {},
+        "corrections": [],
+        "relevant_ids": [
+          "K014"
+        ],
+        "expect_no_evidence": false,
+        "expected_context": {},
+        "forbidden_query_terms": []
+      },
+      {
+        "id": "S22",
+        "split": "challenge",
+        "category": "knowledge",
+        "question": "摇滚饵导水舌与潜深有什么关系？",
+        "answers": {},
+        "corrections": [],
+        "relevant_ids": [
+          "K012"
+        ],
+        "expect_no_evidence": false,
+        "expected_context": {},
+        "forbidden_query_terms": []
+      },
+      {
+        "id": "S23",
+        "split": "challenge",
+        "category": "vague",
+        "question": "我在池塘，应该优先观察哪里？",
+        "answers": {
+          "cover": "3"
+        },
+        "corrections": [],
+        "relevant_ids": [
+          "K003"
+        ],
+        "expect_no_evidence": false,
+        "expected_context": {
+          "waterbody": "池塘",
+          "cover": "岩石"
+        },
+        "forbidden_query_terms": []
+      },
+      {
+        "id": "S24",
+        "split": "challenge",
+        "category": "negation",
+        "question": "如果在湖泊有水草，怎么钓？",
+        "answers": {
+          "waterbody": "0",
+          "cover": "0"
+        },
+        "corrections": [],
+        "relevant_ids": [],
+        "expect_no_evidence": true,
+        "expected_context": {
+          "waterbody": null,
+          "cover": null
+        },
+        "forbidden_query_terms": [
+          "湖泊",
+          "水草"
+        ]
+      },
+      {
+        "id": "S25",
+        "split": "challenge",
+        "category": "negation",
+        "question": "我在湖泊，没看到水草，怎么钓？",
+        "answers": {
+          "cover": "5"
+        },
+        "corrections": [],
+        "relevant_ids": [
+          "K005"
+        ],
+        "expect_no_evidence": false,
+        "expected_context": {
+          "cover": "未观察到上述结构"
+        },
+        "forbidden_query_terms": [
+          "水草"
+        ]
+      },
+      {
+        "id": "S26",
+        "split": "challenge",
+        "category": "correction",
+        "question": "我在河流，看到岩石，应该先找哪里？",
+        "answers": {},
+        "corrections": [
+          [
+            "waterbody",
+            "2"
+          ],
+          [
+            "cover",
+            "2"
+          ]
+        ],
+        "relevant_ids": [
+          "K003",
+          "K005"
+        ],
+        "expect_no_evidence": false,
+        "expected_context": {
+          "waterbody": "水库",
+          "cover": "倒木"
+        },
+        "forbidden_query_terms": [
+          "河流",
+          "岩石"
+        ]
+      },
+      {
+        "id": "S27",
+        "split": "challenge",
+        "category": "scope",
+        "question": "尖吻鲈生活习性是什么？",
+        "answers": {},
+        "corrections": [],
+        "relevant_ids": [],
+        "expect_no_evidence": true,
+        "expected_context": {},
+        "forbidden_query_terms": []
+      },
+      {
+        "id": "S28",
+        "split": "challenge",
+        "category": "temperature",
+        "question": "现在水温22度。",
+        "answers": {},
+        "corrections": [],
+        "relevant_ids": [
+          "K018",
+          "K019",
+          "K021"
+        ],
+        "expect_no_evidence": false,
+        "expected_context": {
+          "temperature_source": "水温"
+        },
+        "forbidden_query_terms": []
+      },
+      {
+        "id": "S29",
+        "split": "challenge",
+        "category": "no_evidence",
+        "question": "这儿明天一定可以钓到几条鱼？",
+        "answers": {},
+        "corrections": [],
+        "relevant_ids": [],
+        "expect_no_evidence": true,
+        "expected_context": {},
+        "forbidden_query_terms": []
+      },
+      {
+        "id": "S30",
+        "split": "challenge",
+        "category": "negated_scope",
+        "question": "我不是在海边，我在湖泊，看到水草，应该先看哪里？",
+        "answers": {},
+        "corrections": [],
+        "relevant_ids": [
+          "K003",
+          "K005"
+        ],
+        "expect_no_evidence": false,
+        "expected_context": {
+          "waterbody": "湖泊",
+          "cover": "水草"
+        },
+        "forbidden_query_terms": []
+      }
+    ]
+  },
+  "questions": {
+    "S01": "大口黑鲈吃什么？",
+    "S02": "气温能直接代替水温吗？",
+    "S03": "湖泊为什么会出现温度分层？",
+    "S04": "冷水和暖水的溶氧有什么区别？",
+    "S05": "侧线是什么？",
+    "S06": "我在淡水边，应该先看哪里？",
+    "S07": "我现在应该怎么选钓位？",
+    "S08": "新手应该先找哪里？",
+    "S09": "我在湖边，应该观察什么？",
+    "S10": "我在淡水边，应该先看哪里？",
+    "S11": "我不知道哪里钓合适。",
+    "S12": "我在湖泊，看到水草和倒木，应该先看哪里？",
+    "S13": "我在湖泊，看到水草，怎么选钓位？",
+    "S14": "我在水库，看到倒木，哪里钓？",
+    "S15": "海边花鲈怎么钓？",
+    "S16": "小口黑鲈吃什么？",
+    "S17": "孔雀鲈用什么饵？",
+    "S18": "请给出量子计算硬件纠错方案。",
+    "S19": "这片水域的确切鱼类数量是多少？",
+    "S20": "今天温度28度。"
+  },
+  "provenance": {
+    "python": "3.11.5",
+    "knowledge_sha256": "76435a1dc22a59dc53acf5b0e4235ffb24c97a5d6008a9960d17b9d3fef1f909",
+    "sources_sha256": "811324daa5a4e538d83a8668ac1df924b6b538811aedcc33723cd4d07921a652",
+    "label_status": "draft_author_labels_not_expert_validated",
+    "code_sha256": {
+      "benchmark_v05.py": "1497d57dc0c704d2e3e3b39843d1ea38cb09ee21e71b1f038e022c188995dbec",
+      "retriever.py": "6fc312d4ec7f0df638547c17fe05f1c26894447d22a6e156b16f4824d1c4b435",
+      "context_agent.py": "585cc32f1c5899c4dbdcd8bad2dc92450d6f451941df905ada3802848c395db1",
+      "grounding.py": "0c63ce217fcf5bd9a1b90a02436f4aa62267df1bcbfcae25905afe97ffc82e81",
+      "llm.py": "2a26cd3e7a472c2abc78abd657334b422b3529f97d31b8de13863f85de30182e",
+      "agent_v03.py": "54ec1c48e0892ed9a39f1c53688e20c5a394666b6502c6b4add55a7c4ec5a934"
+    }
+  },
+  "summary": {
+    "direct": {
+      "cases": 20,
+      "hit_at_4": {
+        "n": 12,
+        "mean": 0.6666666666666666
+      },
+      "recall_at_4": {
+        "n": 12,
+        "mean": 0.6111111111111112
+      },
+      "reciprocal_rank_at_4": {
+        "n": 12,
+        "mean": 0.4861111111111111
+      },
+      "empty_on_negative": {
+        "n": 8,
+        "mean": 0.875
+      },
+      "stale_query_clean": {
+        "n": 3,
+        "mean": 0
+      },
+      "context_exact": {
+        "n": 0,
+        "mean": null
+      }
+    },
+    "append_context": {
+      "cases": 20,
+      "hit_at_4": {
+        "n": 12,
+        "mean": 1
+      },
+      "recall_at_4": {
+        "n": 12,
+        "mean": 0.9027777777777778
+      },
+      "reciprocal_rank_at_4": {
+        "n": 12,
+        "mean": 0.8611111111111112
+      },
+      "empty_on_negative": {
+        "n": 8,
+        "mean": 0.625
+      },
+      "stale_query_clean": {
+        "n": 3,
+        "mean": 0
+      },
+      "context_exact": {
+        "n": 0,
+        "mean": null
+      }
+    },
+    "agent_state": {
+      "cases": 20,
+      "hit_at_4": {
+        "n": 12,
+        "mean": 1
+      },
+      "recall_at_4": {
+        "n": 12,
+        "mean": 0.9166666666666666
+      },
+      "reciprocal_rank_at_4": {
+        "n": 12,
+        "mean": 0.8333333333333334
+      },
+      "empty_on_negative": {
+        "n": 8,
+        "mean": 1
+      },
+      "stale_query_clean": {
+        "n": 3,
+        "mean": 1
+      },
+      "context_exact": {
+        "n": 10,
+        "mean": 1
+      }
+    }
+  },
+  "by_category": {
+    "knowledge": {
+      "direct": {
+        "cases": 5,
+        "hit_at_4": {
+          "n": 5,
+          "mean": 1
+        },
+        "recall_at_4": {
+          "n": 5,
+          "mean": 1.0
+        },
+        "reciprocal_rank_at_4": {
+          "n": 5,
+          "mean": 0.8
+        },
+        "empty_on_negative": {
+          "n": 0,
+          "mean": null
+        },
+        "stale_query_clean": {
+          "n": 0,
+          "mean": null
+        },
+        "context_exact": {
+          "n": 0,
+          "mean": null
+        }
+      },
+      "append_context": {
+        "cases": 5,
+        "hit_at_4": {
+          "n": 5,
+          "mean": 1
+        },
+        "recall_at_4": {
+          "n": 5,
+          "mean": 1.0
+        },
+        "reciprocal_rank_at_4": {
+          "n": 5,
+          "mean": 0.8
+        },
+        "empty_on_negative": {
+          "n": 0,
+          "mean": null
+        },
+        "stale_query_clean": {
+          "n": 0,
+          "mean": null
+        },
+        "context_exact": {
+          "n": 0,
+          "mean": null
+        }
+      },
+      "agent_state": {
+        "cases": 5,
+        "hit_at_4": {
+          "n": 5,
+          "mean": 1
+        },
+        "recall_at_4": {
+          "n": 5,
+          "mean": 1.0
+        },
+        "reciprocal_rank_at_4": {
+          "n": 5,
+          "mean": 0.8
+        },
+        "empty_on_negative": {
+          "n": 0,
+          "mean": null
+        },
+        "stale_query_clean": {
+          "n": 0,
+          "mean": null
+        },
+        "context_exact": {
+          "n": 0,
+          "mean": null
+        }
+      }
+    },
+    "vague": {
+      "direct": {
+        "cases": 4,
+        "hit_at_4": {
+          "n": 4,
+          "mean": 0
+        },
+        "recall_at_4": {
+          "n": 4,
+          "mean": 0.0
+        },
+        "reciprocal_rank_at_4": {
+          "n": 4,
+          "mean": 0
+        },
+        "empty_on_negative": {
+          "n": 0,
+          "mean": null
+        },
+        "stale_query_clean": {
+          "n": 0,
+          "mean": null
+        },
+        "context_exact": {
+          "n": 0,
+          "mean": null
+        }
+      },
+      "append_context": {
+        "cases": 4,
+        "hit_at_4": {
+          "n": 4,
+          "mean": 1
+        },
+        "recall_at_4": {
+          "n": 4,
+          "mean": 0.875
+        },
+        "reciprocal_rank_at_4": {
+          "n": 4,
+          "mean": 1.0
+        },
+        "empty_on_negative": {
+          "n": 0,
+          "mean": null
+        },
+        "stale_query_clean": {
+          "n": 0,
+          "mean": null
+        },
+        "context_exact": {
+          "n": 0,
+          "mean": null
+        }
+      },
+      "agent_state": {
+        "cases": 4,
+        "hit_at_4": {
+          "n": 4,
+          "mean": 1
+        },
+        "recall_at_4": {
+          "n": 4,
+          "mean": 0.875
+        },
+        "reciprocal_rank_at_4": {
+          "n": 4,
+          "mean": 0.875
+        },
+        "empty_on_negative": {
+          "n": 0,
+          "mean": null
+        },
+        "stale_query_clean": {
+          "n": 0,
+          "mean": null
+        },
+        "context_exact": {
+          "n": 4,
+          "mean": 1
+        }
+      }
+    },
+    "unknown": {
+      "direct": {
+        "cases": 2,
+        "hit_at_4": {
+          "n": 0,
+          "mean": null
+        },
+        "recall_at_4": {
+          "n": 0,
+          "mean": null
+        },
+        "reciprocal_rank_at_4": {
+          "n": 0,
+          "mean": null
+        },
+        "empty_on_negative": {
+          "n": 2,
+          "mean": 1
+        },
+        "stale_query_clean": {
+          "n": 0,
+          "mean": null
+        },
+        "context_exact": {
+          "n": 0,
+          "mean": null
+        }
+      },
+      "append_context": {
+        "cases": 2,
+        "hit_at_4": {
+          "n": 0,
+          "mean": null
+        },
+        "recall_at_4": {
+          "n": 0,
+          "mean": null
+        },
+        "reciprocal_rank_at_4": {
+          "n": 0,
+          "mean": null
+        },
+        "empty_on_negative": {
+          "n": 2,
+          "mean": 0
+        },
+        "stale_query_clean": {
+          "n": 0,
+          "mean": null
+        },
+        "context_exact": {
+          "n": 0,
+          "mean": null
+        }
+      },
+      "agent_state": {
+        "cases": 2,
+        "hit_at_4": {
+          "n": 0,
+          "mean": null
+        },
+        "recall_at_4": {
+          "n": 0,
+          "mean": null
+        },
+        "reciprocal_rank_at_4": {
+          "n": 0,
+          "mean": null
+        },
+        "empty_on_negative": {
+          "n": 2,
+          "mean": 1
+        },
+        "stale_query_clean": {
+          "n": 0,
+          "mean": null
+        },
+        "context_exact": {
+          "n": 2,
+          "mean": 1
+        }
+      }
+    },
+    "correction": {
+      "direct": {
+        "cases": 3,
+        "hit_at_4": {
+          "n": 2,
+          "mean": 1
+        },
+        "recall_at_4": {
+          "n": 2,
+          "mean": 1.0
+        },
+        "reciprocal_rank_at_4": {
+          "n": 2,
+          "mean": 0.41666666666666663
+        },
+        "empty_on_negative": {
+          "n": 1,
+          "mean": 0
+        },
+        "stale_query_clean": {
+          "n": 3,
+          "mean": 0
+        },
+        "context_exact": {
+          "n": 0,
+          "mean": null
+        }
+      },
+      "append_context": {
+        "cases": 3,
+        "hit_at_4": {
+          "n": 2,
+          "mean": 1
+        },
+        "recall_at_4": {
+          "n": 2,
+          "mean": 1.0
+        },
+        "reciprocal_rank_at_4": {
+          "n": 2,
+          "mean": 0.6666666666666666
+        },
+        "empty_on_negative": {
+          "n": 1,
+          "mean": 0
+        },
+        "stale_query_clean": {
+          "n": 3,
+          "mean": 0
+        },
+        "context_exact": {
+          "n": 0,
+          "mean": null
+        }
+      },
+      "agent_state": {
+        "cases": 3,
+        "hit_at_4": {
+          "n": 2,
+          "mean": 1
+        },
+        "recall_at_4": {
+          "n": 2,
+          "mean": 0.75
+        },
+        "reciprocal_rank_at_4": {
+          "n": 2,
+          "mean": 1.0
+        },
+        "empty_on_negative": {
+          "n": 1,
+          "mean": 1
+        },
+        "stale_query_clean": {
+          "n": 3,
+          "mean": 1
+        },
+        "context_exact": {
+          "n": 3,
+          "mean": 1
+        }
+      }
+    },
+    "scope": {
+      "direct": {
+        "cases": 3,
+        "hit_at_4": {
+          "n": 0,
+          "mean": null
+        },
+        "recall_at_4": {
+          "n": 0,
+          "mean": null
+        },
+        "reciprocal_rank_at_4": {
+          "n": 0,
+          "mean": null
+        },
+        "empty_on_negative": {
+          "n": 3,
+          "mean": 1
+        },
+        "stale_query_clean": {
+          "n": 0,
+          "mean": null
+        },
+        "context_exact": {
+          "n": 0,
+          "mean": null
+        }
+      },
+      "append_context": {
+        "cases": 3,
+        "hit_at_4": {
+          "n": 0,
+          "mean": null
+        },
+        "recall_at_4": {
+          "n": 0,
+          "mean": null
+        },
+        "reciprocal_rank_at_4": {
+          "n": 0,
+          "mean": null
+        },
+        "empty_on_negative": {
+          "n": 3,
+          "mean": 1
+        },
+        "stale_query_clean": {
+          "n": 0,
+          "mean": null
+        },
+        "context_exact": {
+          "n": 0,
+          "mean": null
+        }
+      },
+      "agent_state": {
+        "cases": 3,
+        "hit_at_4": {
+          "n": 0,
+          "mean": null
+        },
+        "recall_at_4": {
+          "n": 0,
+          "mean": null
+        },
+        "reciprocal_rank_at_4": {
+          "n": 0,
+          "mean": null
+        },
+        "empty_on_negative": {
+          "n": 3,
+          "mean": 1
+        },
+        "stale_query_clean": {
+          "n": 0,
+          "mean": null
+        },
+        "context_exact": {
+          "n": 0,
+          "mean": null
+        }
+      }
+    },
+    "no_evidence": {
+      "direct": {
+        "cases": 2,
+        "hit_at_4": {
+          "n": 0,
+          "mean": null
+        },
+        "recall_at_4": {
+          "n": 0,
+          "mean": null
+        },
+        "reciprocal_rank_at_4": {
+          "n": 0,
+          "mean": null
+        },
+        "empty_on_negative": {
+          "n": 2,
+          "mean": 1
+        },
+        "stale_query_clean": {
+          "n": 0,
+          "mean": null
+        },
+        "context_exact": {
+          "n": 0,
+          "mean": null
+        }
+      },
+      "append_context": {
+        "cases": 2,
+        "hit_at_4": {
+          "n": 0,
+          "mean": null
+        },
+        "recall_at_4": {
+          "n": 0,
+          "mean": null
+        },
+        "reciprocal_rank_at_4": {
+          "n": 0,
+          "mean": null
+        },
+        "empty_on_negative": {
+          "n": 2,
+          "mean": 1
+        },
+        "stale_query_clean": {
+          "n": 0,
+          "mean": null
+        },
+        "context_exact": {
+          "n": 0,
+          "mean": null
+        }
+      },
+      "agent_state": {
+        "cases": 2,
+        "hit_at_4": {
+          "n": 0,
+          "mean": null
+        },
+        "recall_at_4": {
+          "n": 0,
+          "mean": null
+        },
+        "reciprocal_rank_at_4": {
+          "n": 0,
+          "mean": null
+        },
+        "empty_on_negative": {
+          "n": 2,
+          "mean": 1
+        },
+        "stale_query_clean": {
+          "n": 0,
+          "mean": null
+        },
+        "context_exact": {
+          "n": 0,
+          "mean": null
+        }
+      }
+    },
+    "temperature": {
+      "direct": {
+        "cases": 1,
+        "hit_at_4": {
+          "n": 1,
+          "mean": 1
+        },
+        "recall_at_4": {
+          "n": 1,
+          "mean": 0.3333333333333333
+        },
+        "reciprocal_rank_at_4": {
+          "n": 1,
+          "mean": 1.0
+        },
+        "empty_on_negative": {
+          "n": 0,
+          "mean": null
+        },
+        "stale_query_clean": {
+          "n": 0,
+          "mean": null
+        },
+        "context_exact": {
+          "n": 0,
+          "mean": null
+        }
+      },
+      "append_context": {
+        "cases": 1,
+        "hit_at_4": {
+          "n": 1,
+          "mean": 1
+        },
+        "recall_at_4": {
+          "n": 1,
+          "mean": 0.3333333333333333
+        },
+        "reciprocal_rank_at_4": {
+          "n": 1,
+          "mean": 1.0
+        },
+        "empty_on_negative": {
+          "n": 0,
+          "mean": null
+        },
+        "stale_query_clean": {
+          "n": 0,
+          "mean": null
+        },
+        "context_exact": {
+          "n": 0,
+          "mean": null
+        }
+      },
+      "agent_state": {
+        "cases": 1,
+        "hit_at_4": {
+          "n": 1,
+          "mean": 1
+        },
+        "recall_at_4": {
+          "n": 1,
+          "mean": 1.0
+        },
+        "reciprocal_rank_at_4": {
+          "n": 1,
+          "mean": 0.5
+        },
+        "empty_on_negative": {
+          "n": 0,
+          "mean": null
+        },
+        "stale_query_clean": {
+          "n": 0,
+          "mean": null
+        },
+        "context_exact": {
+          "n": 1,
+          "mean": 1
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "case_id": "S01",
+      "split": "dev",
+      "category": "knowledge",
+      "arm": "direct",
+      "query": "大口黑鲈吃什么？",
+      "retrieved_ids": [
+        "K004",
+        "K012"
+      ],
+      "status": "ok",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 1.0,
+        "reciprocal_rank_at_4": 1.0,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S01",
+      "split": "dev",
+      "category": "knowledge",
+      "arm": "append_context",
+      "query": "大口黑鲈吃什么？；当前补充条件：",
+      "retrieved_ids": [
+        "K004",
+        "K012"
+      ],
+      "status": "ok",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 1.0,
+        "reciprocal_rank_at_4": 1.0,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S01",
+      "split": "dev",
+      "category": "knowledge",
+      "arm": "agent_state",
+      "query": "大口黑鲈吃什么？",
+      "retrieved_ids": [
+        "K004",
+        "K012"
+      ],
+      "status": "evidence_only",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 1.0,
+        "reciprocal_rank_at_4": 1.0,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S02",
+      "split": "dev",
+      "category": "knowledge",
+      "arm": "direct",
+      "query": "气温能直接代替水温吗？",
+      "retrieved_ids": [
+        "K008",
+        "K018",
+        "K019",
+        "K021"
+      ],
+      "status": "ok",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 1.0,
+        "reciprocal_rank_at_4": 0.5,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S02",
+      "split": "dev",
+      "category": "knowledge",
+      "arm": "append_context",
+      "query": "气温能直接代替水温吗？；当前补充条件：",
+      "retrieved_ids": [
+        "K008",
+        "K018",
+        "K019",
+        "K021"
+      ],
+      "status": "ok",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 1.0,
+        "reciprocal_rank_at_4": 0.5,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S02",
+      "split": "dev",
+      "category": "knowledge",
+      "arm": "agent_state",
+      "query": "气温能直接代替水温吗？",
+      "retrieved_ids": [
+        "K008",
+        "K018",
+        "K019",
+        "K021"
+      ],
+      "status": "evidence_only",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 1.0,
+        "reciprocal_rank_at_4": 0.5,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S03",
+      "split": "dev",
+      "category": "knowledge",
+      "arm": "direct",
+      "query": "湖泊为什么会出现温度分层？",
+      "retrieved_ids": [
+        "K016",
+        "K019",
+        "K005",
+        "K018"
+      ],
+      "status": "ok",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 1.0,
+        "reciprocal_rank_at_4": 0.5,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S03",
+      "split": "dev",
+      "category": "knowledge",
+      "arm": "append_context",
+      "query": "湖泊为什么会出现温度分层？；当前补充条件：",
+      "retrieved_ids": [
+        "K016",
+        "K019",
+        "K005",
+        "K018"
+      ],
+      "status": "ok",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 1.0,
+        "reciprocal_rank_at_4": 0.5,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S03",
+      "split": "dev",
+      "category": "knowledge",
+      "arm": "agent_state",
+      "query": "湖泊为什么会出现温度分层？",
+      "retrieved_ids": [
+        "K016",
+        "K019",
+        "K005",
+        "K018"
+      ],
+      "status": "evidence_only",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 1.0,
+        "reciprocal_rank_at_4": 0.5,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S04",
+      "split": "dev",
+      "category": "knowledge",
+      "arm": "direct",
+      "query": "冷水和暖水的溶氧有什么区别？",
+      "retrieved_ids": [
+        "K015",
+        "K017",
+        "K016"
+      ],
+      "status": "ok",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 1.0,
+        "reciprocal_rank_at_4": 1.0,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S04",
+      "split": "dev",
+      "category": "knowledge",
+      "arm": "append_context",
+      "query": "冷水和暖水的溶氧有什么区别？；当前补充条件：",
+      "retrieved_ids": [
+        "K015",
+        "K017",
+        "K016"
+      ],
+      "status": "ok",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 1.0,
+        "reciprocal_rank_at_4": 1.0,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S04",
+      "split": "dev",
+      "category": "knowledge",
+      "arm": "agent_state",
+      "query": "冷水和暖水的溶氧有什么区别？",
+      "retrieved_ids": [
+        "K015",
+        "K017",
+        "K016"
+      ],
+      "status": "evidence_only",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 1.0,
+        "reciprocal_rank_at_4": 1.0,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S05",
+      "split": "dev",
+      "category": "knowledge",
+      "arm": "direct",
+      "query": "侧线是什么？",
+      "retrieved_ids": [
+        "K020"
+      ],
+      "status": "ok",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 1.0,
+        "reciprocal_rank_at_4": 1.0,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S05",
+      "split": "dev",
+      "category": "knowledge",
+      "arm": "append_context",
+      "query": "侧线是什么？；当前补充条件：",
+      "retrieved_ids": [
+        "K020"
+      ],
+      "status": "ok",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 1.0,
+        "reciprocal_rank_at_4": 1.0,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S05",
+      "split": "dev",
+      "category": "knowledge",
+      "arm": "agent_state",
+      "query": "侧线是什么？",
+      "retrieved_ids": [
+        "K020"
+      ],
+      "status": "evidence_only",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 1.0,
+        "reciprocal_rank_at_4": 1.0,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S06",
+      "split": "dev",
+      "category": "vague",
+      "arm": "direct",
+      "query": "我在淡水边，应该先看哪里？",
+      "retrieved_ids": [],
+      "status": "empty",
+      "metrics": {
+        "hit_at_4": false,
+        "recall_at_4": 0.0,
+        "reciprocal_rank_at_4": 0,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S06",
+      "split": "dev",
+      "category": "vague",
+      "arm": "append_context",
+      "query": "我在淡水边，应该先看哪里？；当前补充条件：水域：湖泊；可见结构：水草",
+      "retrieved_ids": [
+        "K003",
+        "K010",
+        "K005",
+        "K011"
+      ],
+      "status": "ok",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 1.0,
+        "reciprocal_rank_at_4": 1.0,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S06",
+      "split": "dev",
+      "category": "vague",
+      "arm": "agent_state",
+      "query": "大口黑鲈；湖泊；水草",
+      "retrieved_ids": [
+        "K010",
+        "K003",
+        "K005",
+        "K016"
+      ],
+      "status": "evidence_only",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 1.0,
+        "reciprocal_rank_at_4": 0.5,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": true
+      }
+    },
+    {
+      "case_id": "S07",
+      "split": "dev",
+      "category": "vague",
+      "arm": "direct",
+      "query": "我现在应该怎么选钓位？",
+      "retrieved_ids": [],
+      "status": "empty",
+      "metrics": {
+        "hit_at_4": false,
+        "recall_at_4": 0.0,
+        "reciprocal_rank_at_4": 0,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S07",
+      "split": "dev",
+      "category": "vague",
+      "arm": "append_context",
+      "query": "我现在应该怎么选钓位？；当前补充条件：水域：水库；可见结构：倒木",
+      "retrieved_ids": [
+        "K003",
+        "K005",
+        "K010",
+        "K011"
+      ],
+      "status": "ok",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 1.0,
+        "reciprocal_rank_at_4": 1.0,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S07",
+      "split": "dev",
+      "category": "vague",
+      "arm": "agent_state",
+      "query": "大口黑鲈；水库；倒木",
+      "retrieved_ids": [
+        "K003",
+        "K005",
+        "K010",
+        "K011"
+      ],
+      "status": "evidence_only",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 1.0,
+        "reciprocal_rank_at_4": 1.0,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": true
+      }
+    },
+    {
+      "case_id": "S08",
+      "split": "dev",
+      "category": "vague",
+      "arm": "direct",
+      "query": "新手应该先找哪里？",
+      "retrieved_ids": [],
+      "status": "empty",
+      "metrics": {
+        "hit_at_4": false,
+        "recall_at_4": 0.0,
+        "reciprocal_rank_at_4": 0,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S08",
+      "split": "dev",
+      "category": "vague",
+      "arm": "append_context",
+      "query": "新手应该先找哪里？；当前补充条件：水域：河流；可见结构：岩石",
+      "retrieved_ids": [
+        "K003",
+        "K011"
+      ],
+      "status": "ok",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 0.5,
+        "reciprocal_rank_at_4": 1.0,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S08",
+      "split": "dev",
+      "category": "vague",
+      "arm": "agent_state",
+      "query": "大口黑鲈；河流；岩石",
+      "retrieved_ids": [
+        "K003",
+        "K011"
+      ],
+      "status": "evidence_only",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 0.5,
+        "reciprocal_rank_at_4": 1.0,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": true
+      }
+    },
+    {
+      "case_id": "S09",
+      "split": "dev",
+      "category": "vague",
+      "arm": "direct",
+      "query": "我在湖边，应该观察什么？",
+      "retrieved_ids": [],
+      "status": "empty",
+      "metrics": {
+        "hit_at_4": false,
+        "recall_at_4": 0.0,
+        "reciprocal_rank_at_4": 0,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S09",
+      "split": "dev",
+      "category": "vague",
+      "arm": "append_context",
+      "query": "我在湖边，应该观察什么？；当前补充条件：水域：湖泊；可见结构：水草和倒木",
+      "retrieved_ids": [
+        "K003",
+        "K010",
+        "K005",
+        "K011"
+      ],
+      "status": "ok",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 1.0,
+        "reciprocal_rank_at_4": 1.0,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S09",
+      "split": "dev",
+      "category": "vague",
+      "arm": "agent_state",
+      "query": "大口黑鲈；湖泊；水草和倒木",
+      "retrieved_ids": [
+        "K003",
+        "K010",
+        "K005",
+        "K011"
+      ],
+      "status": "evidence_only",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 1.0,
+        "reciprocal_rank_at_4": 1.0,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": true
+      }
+    },
+    {
+      "case_id": "S10",
+      "split": "dev",
+      "category": "unknown",
+      "arm": "direct",
+      "query": "我在淡水边，应该先看哪里？",
+      "retrieved_ids": [],
+      "status": "empty",
+      "metrics": {
+        "hit_at_4": null,
+        "recall_at_4": null,
+        "reciprocal_rank_at_4": null,
+        "empty_on_negative": true,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S10",
+      "split": "dev",
+      "category": "unknown",
+      "arm": "append_context",
+      "query": "我在淡水边，应该先看哪里？；当前补充条件：水域：未知；可见结构：未知",
+      "retrieved_ids": [
+        "K003",
+        "K011"
+      ],
+      "status": "ok",
+      "metrics": {
+        "hit_at_4": null,
+        "recall_at_4": null,
+        "reciprocal_rank_at_4": null,
+        "empty_on_negative": false,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S10",
+      "split": "dev",
+      "category": "unknown",
+      "arm": "agent_state",
+      "query": "大口黑鲈",
+      "retrieved_ids": [],
+      "status": "insufficient_evidence",
+      "metrics": {
+        "hit_at_4": null,
+        "recall_at_4": null,
+        "reciprocal_rank_at_4": null,
+        "empty_on_negative": true,
+        "stale_query_clean": null,
+        "context_exact": true
+      }
+    },
+    {
+      "case_id": "S11",
+      "split": "dev",
+      "category": "unknown",
+      "arm": "direct",
+      "query": "我不知道哪里钓合适。",
+      "retrieved_ids": [],
+      "status": "empty",
+      "metrics": {
+        "hit_at_4": null,
+        "recall_at_4": null,
+        "reciprocal_rank_at_4": null,
+        "empty_on_negative": true,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S11",
+      "split": "dev",
+      "category": "unknown",
+      "arm": "append_context",
+      "query": "我不知道哪里钓合适。；当前补充条件：水域：未知；可见结构：未知",
+      "retrieved_ids": [
+        "K003",
+        "K011"
+      ],
+      "status": "ok",
+      "metrics": {
+        "hit_at_4": null,
+        "recall_at_4": null,
+        "reciprocal_rank_at_4": null,
+        "empty_on_negative": false,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S11",
+      "split": "dev",
+      "category": "unknown",
+      "arm": "agent_state",
+      "query": "大口黑鲈",
+      "retrieved_ids": [],
+      "status": "insufficient_evidence",
+      "metrics": {
+        "hit_at_4": null,
+        "recall_at_4": null,
+        "reciprocal_rank_at_4": null,
+        "empty_on_negative": true,
+        "stale_query_clean": null,
+        "context_exact": true
+      }
+    },
+    {
+      "case_id": "S12",
+      "split": "dev",
+      "category": "correction",
+      "arm": "direct",
+      "query": "我在湖泊，看到水草和倒木，应该先看哪里？",
+      "retrieved_ids": [
+        "K003",
+        "K010",
+        "K005",
+        "K011"
+      ],
+      "status": "ok",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 1.0,
+        "reciprocal_rank_at_4": 0.3333333333333333,
+        "empty_on_negative": null,
+        "stale_query_clean": false,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S12",
+      "split": "dev",
+      "category": "correction",
+      "arm": "append_context",
+      "query": "我在湖泊，看到水草和倒木，应该先看哪里？；当前补充条件：水域：湖泊；可见结构：未观察到上述结构",
+      "retrieved_ids": [
+        "K003",
+        "K010",
+        "K005",
+        "K011"
+      ],
+      "status": "ok",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 1.0,
+        "reciprocal_rank_at_4": 0.3333333333333333,
+        "empty_on_negative": null,
+        "stale_query_clean": false,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S12",
+      "split": "dev",
+      "category": "correction",
+      "arm": "agent_state",
+      "query": "大口黑鲈；湖泊",
+      "retrieved_ids": [
+        "K005",
+        "K010",
+        "K016",
+        "K019"
+      ],
+      "status": "evidence_only",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 1.0,
+        "reciprocal_rank_at_4": 1.0,
+        "empty_on_negative": null,
+        "stale_query_clean": true,
+        "context_exact": true
+      }
+    },
+    {
+      "case_id": "S13",
+      "split": "dev",
+      "category": "correction",
+      "arm": "direct",
+      "query": "我在湖泊，看到水草，怎么选钓位？",
+      "retrieved_ids": [
+        "K010",
+        "K003",
+        "K005",
+        "K016"
+      ],
+      "status": "ok",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 1.0,
+        "reciprocal_rank_at_4": 0.5,
+        "empty_on_negative": null,
+        "stale_query_clean": false,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S13",
+      "split": "dev",
+      "category": "correction",
+      "arm": "append_context",
+      "query": "我在湖泊，看到水草，怎么选钓位？；当前补充条件：水域：河流；可见结构：岩石",
+      "retrieved_ids": [
+        "K003",
+        "K010",
+        "K005",
+        "K011"
+      ],
+      "status": "ok",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 1.0,
+        "reciprocal_rank_at_4": 1.0,
+        "empty_on_negative": null,
+        "stale_query_clean": false,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S13",
+      "split": "dev",
+      "category": "correction",
+      "arm": "agent_state",
+      "query": "大口黑鲈；河流；岩石",
+      "retrieved_ids": [
+        "K003",
+        "K011"
+      ],
+      "status": "evidence_only",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 0.5,
+        "reciprocal_rank_at_4": 1.0,
+        "empty_on_negative": null,
+        "stale_query_clean": true,
+        "context_exact": true
+      }
+    },
+    {
+      "case_id": "S14",
+      "split": "dev",
+      "category": "correction",
+      "arm": "direct",
+      "query": "我在水库，看到倒木，哪里钓？",
+      "retrieved_ids": [
+        "K003",
+        "K005",
+        "K010",
+        "K011"
+      ],
+      "status": "ok",
+      "metrics": {
+        "hit_at_4": null,
+        "recall_at_4": null,
+        "reciprocal_rank_at_4": null,
+        "empty_on_negative": false,
+        "stale_query_clean": false,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S14",
+      "split": "dev",
+      "category": "correction",
+      "arm": "append_context",
+      "query": "我在水库，看到倒木，哪里钓？；当前补充条件：水域：未知；可见结构：未知",
+      "retrieved_ids": [
+        "K003",
+        "K005",
+        "K010",
+        "K011"
+      ],
+      "status": "ok",
+      "metrics": {
+        "hit_at_4": null,
+        "recall_at_4": null,
+        "reciprocal_rank_at_4": null,
+        "empty_on_negative": false,
+        "stale_query_clean": false,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S14",
+      "split": "dev",
+      "category": "correction",
+      "arm": "agent_state",
+      "query": "大口黑鲈",
+      "retrieved_ids": [],
+      "status": "insufficient_evidence",
+      "metrics": {
+        "hit_at_4": null,
+        "recall_at_4": null,
+        "reciprocal_rank_at_4": null,
+        "empty_on_negative": true,
+        "stale_query_clean": true,
+        "context_exact": true
+      }
+    },
+    {
+      "case_id": "S15",
+      "split": "dev",
+      "category": "scope",
+      "arm": "direct",
+      "query": "海边花鲈怎么钓？",
+      "retrieved_ids": [],
+      "status": "out_of_scope",
+      "metrics": {
+        "hit_at_4": null,
+        "recall_at_4": null,
+        "reciprocal_rank_at_4": null,
+        "empty_on_negative": true,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S15",
+      "split": "dev",
+      "category": "scope",
+      "arm": "append_context",
+      "query": "海边花鲈怎么钓？；当前补充条件：",
+      "retrieved_ids": [],
+      "status": "out_of_scope",
+      "metrics": {
+        "hit_at_4": null,
+        "recall_at_4": null,
+        "reciprocal_rank_at_4": null,
+        "empty_on_negative": true,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S15",
+      "split": "dev",
+      "category": "scope",
+      "arm": "agent_state",
+      "query": "海边花鲈怎么钓？",
+      "retrieved_ids": [],
+      "status": "insufficient_evidence",
+      "metrics": {
+        "hit_at_4": null,
+        "recall_at_4": null,
+        "reciprocal_rank_at_4": null,
+        "empty_on_negative": true,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S16",
+      "split": "dev",
+      "category": "scope",
+      "arm": "direct",
+      "query": "小口黑鲈吃什么？",
+      "retrieved_ids": [],
+      "status": "out_of_scope",
+      "metrics": {
+        "hit_at_4": null,
+        "recall_at_4": null,
+        "reciprocal_rank_at_4": null,
+        "empty_on_negative": true,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S16",
+      "split": "dev",
+      "category": "scope",
+      "arm": "append_context",
+      "query": "小口黑鲈吃什么？；当前补充条件：",
+      "retrieved_ids": [],
+      "status": "out_of_scope",
+      "metrics": {
+        "hit_at_4": null,
+        "recall_at_4": null,
+        "reciprocal_rank_at_4": null,
+        "empty_on_negative": true,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S16",
+      "split": "dev",
+      "category": "scope",
+      "arm": "agent_state",
+      "query": "小口黑鲈吃什么？",
+      "retrieved_ids": [],
+      "status": "insufficient_evidence",
+      "metrics": {
+        "hit_at_4": null,
+        "recall_at_4": null,
+        "reciprocal_rank_at_4": null,
+        "empty_on_negative": true,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S17",
+      "split": "dev",
+      "category": "scope",
+      "arm": "direct",
+      "query": "孔雀鲈用什么饵？",
+      "retrieved_ids": [],
+      "status": "out_of_scope",
+      "metrics": {
+        "hit_at_4": null,
+        "recall_at_4": null,
+        "reciprocal_rank_at_4": null,
+        "empty_on_negative": true,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S17",
+      "split": "dev",
+      "category": "scope",
+      "arm": "append_context",
+      "query": "孔雀鲈用什么饵？；当前补充条件：",
+      "retrieved_ids": [],
+      "status": "out_of_scope",
+      "metrics": {
+        "hit_at_4": null,
+        "recall_at_4": null,
+        "reciprocal_rank_at_4": null,
+        "empty_on_negative": true,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S17",
+      "split": "dev",
+      "category": "scope",
+      "arm": "agent_state",
+      "query": "孔雀鲈用什么饵？",
+      "retrieved_ids": [],
+      "status": "insufficient_evidence",
+      "metrics": {
+        "hit_at_4": null,
+        "recall_at_4": null,
+        "reciprocal_rank_at_4": null,
+        "empty_on_negative": true,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S18",
+      "split": "dev",
+      "category": "no_evidence",
+      "arm": "direct",
+      "query": "请给出量子计算硬件纠错方案。",
+      "retrieved_ids": [],
+      "status": "empty",
+      "metrics": {
+        "hit_at_4": null,
+        "recall_at_4": null,
+        "reciprocal_rank_at_4": null,
+        "empty_on_negative": true,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S18",
+      "split": "dev",
+      "category": "no_evidence",
+      "arm": "append_context",
+      "query": "请给出量子计算硬件纠错方案。；当前补充条件：",
+      "retrieved_ids": [],
+      "status": "empty",
+      "metrics": {
+        "hit_at_4": null,
+        "recall_at_4": null,
+        "reciprocal_rank_at_4": null,
+        "empty_on_negative": true,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S18",
+      "split": "dev",
+      "category": "no_evidence",
+      "arm": "agent_state",
+      "query": "请给出量子计算硬件纠错方案。",
+      "retrieved_ids": [],
+      "status": "insufficient_evidence",
+      "metrics": {
+        "hit_at_4": null,
+        "recall_at_4": null,
+        "reciprocal_rank_at_4": null,
+        "empty_on_negative": true,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S19",
+      "split": "dev",
+      "category": "no_evidence",
+      "arm": "direct",
+      "query": "这片水域的确切鱼类数量是多少？",
+      "retrieved_ids": [],
+      "status": "empty",
+      "metrics": {
+        "hit_at_4": null,
+        "recall_at_4": null,
+        "reciprocal_rank_at_4": null,
+        "empty_on_negative": true,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S19",
+      "split": "dev",
+      "category": "no_evidence",
+      "arm": "append_context",
+      "query": "这片水域的确切鱼类数量是多少？；当前补充条件：",
+      "retrieved_ids": [],
+      "status": "empty",
+      "metrics": {
+        "hit_at_4": null,
+        "recall_at_4": null,
+        "reciprocal_rank_at_4": null,
+        "empty_on_negative": true,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S19",
+      "split": "dev",
+      "category": "no_evidence",
+      "arm": "agent_state",
+      "query": "这片水域的确切鱼类数量是多少？",
+      "retrieved_ids": [],
+      "status": "insufficient_evidence",
+      "metrics": {
+        "hit_at_4": null,
+        "recall_at_4": null,
+        "reciprocal_rank_at_4": null,
+        "empty_on_negative": true,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S20",
+      "split": "dev",
+      "category": "temperature",
+      "arm": "direct",
+      "query": "今天温度28度。",
+      "retrieved_ids": [
+        "K018"
+      ],
+      "status": "ok",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 0.3333333333333333,
+        "reciprocal_rank_at_4": 1.0,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S20",
+      "split": "dev",
+      "category": "temperature",
+      "arm": "append_context",
+      "query": "今天温度28度。；当前补充条件：温度来源：未知",
+      "retrieved_ids": [
+        "K018"
+      ],
+      "status": "ok",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 0.3333333333333333,
+        "reciprocal_rank_at_4": 1.0,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": null
+      }
+    },
+    {
+      "case_id": "S20",
+      "split": "dev",
+      "category": "temperature",
+      "arm": "agent_state",
+      "query": "大口黑鲈；水温；气温",
+      "retrieved_ids": [
+        "K008",
+        "K018",
+        "K019",
+        "K021"
+      ],
+      "status": "evidence_only",
+      "metrics": {
+        "hit_at_4": true,
+        "recall_at_4": 1.0,
+        "reciprocal_rank_at_4": 0.5,
+        "empty_on_negative": null,
+        "stale_query_clean": null,
+        "context_exact": true
+      }
+    }
+  ]
+}
