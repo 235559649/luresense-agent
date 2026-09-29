@@ -14,6 +14,8 @@ CONCEPTS = {
     "cover": ("障碍物", "掩护", "结构", "倒木", "树根", "岩石"),
     "diet": ("吃什么", "吃啥", "食物", "食性", "捕食", "饵鱼", "螯虾"),
     "habitat": ("水库", "湖泊", "池塘", "回湾", "栖息"),
+    # River terms retrieve documented river habitats, not every lake card.
+    "river_habitat": ("河流", "河边", "河岸", "溪流", "大河", "回湾"),
     "flow": ("水流", "缓流", "静水", "强流"),
     "timing": ("清晨", "早晨", "早上", "黎明", "黄昏", "傍晚", "早晚"),
     "spawning": ("繁殖", "产卵", "繁殖期"),
@@ -97,7 +99,7 @@ class KnowledgeBase:
         if has_out_of_scope(q):
             return {**base, "status": "out_of_scope", "message": "当前仅支持大口黑鲈淡水资料；问题包含其他鱼种或水域，请明确范围。"}
 
-        concepts = [terms for terms in CONCEPTS.values() if any(t in q for t in terms)]
+        concepts = [(name, terms) for name, terms in CONCEPTS.items() if any(t in q for t in terms)]
         # 泛称不是检索意图；避免每个含“鲈鱼”的问题都命中分类卡片。
         generic = {"大口黑鲈", "鲈鱼", "bass", "largemouth bass"}
         explicit_tags = {normalize(t) for c in self.cards for t in c["tags"]
@@ -109,26 +111,33 @@ class KnowledgeBase:
             tags = {normalize(t) for t in card["tags"]}
             title = normalize(card["title"])
             claim = normalize(card["claim"])
-            score, reasons = 0, set()
+            score, reasons, components = 0, set(), []
             if normalize(card["id"]) in requested_ids:
                 score += 100
                 reasons.add(card["id"])
-            for term in explicit_tags:
+                components.append({"kind": "exact_id", "points": 100, "query_terms": [card["id"]], "card_terms": [card["id"]]})
+            for term in sorted(explicit_tags):
                 if term in tags:
                     score += 4
                     reasons.add(term)
+                    components.append({"kind": "exact_tag", "points": 4, "query_terms": [term], "card_terms": [term]})
             # 同一概念最多加一次，避免重复词堆砌分数。
-            for terms in concepts:
+            for name, terms in concepts:
                 hits = {t for t in terms if t in tags or t in title or t in claim}
                 if hits:
-                    score += 3 if any(t in tags for t in hits) else 1
+                    points = 3 if any(t in tags for t in hits) else 1
+                    score += points
+                    components.append({"kind": "concept", "concept": name, "points": points,
+                                       "query_terms": sorted(t for t in terms if t in q),
+                                       "card_terms": sorted(hits)})
                     reasons.update(hits)
             if score:
-                ranked.append((score, card, sorted(reasons)))
+                ranked.append((score, card, sorted(reasons), components))
         ranked.sort(key=lambda item: (-item[0], item[1]["id"]))
         results = [{"card": card, "matched_terms": reasons,
+                    "retrieval_score": score, "score_components": components,
                     "sources": [self.sources[s] for s in card["source_ids"]]}
-                   for _, card, reasons in ranked[:limit]]
+                   for score, card, reasons, components in ranked[:limit]]
         return {**base, "status": "ok" if results else "empty", "results": results,
                 "message": "找到相关资料；请核对适用条件。" if results else "当前知识库没有匹配资料，请换用具体主题；不会补造答案。"}
 
