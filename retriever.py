@@ -12,7 +12,7 @@ DATA_DIR = Path(__file__).resolve().parent / "data"
 CONCEPTS = {
     "vegetation": ("水草", "植被", "草区", "草边", "草丛"),
     "cover": ("障碍物", "掩护", "结构", "倒木", "树根", "岩石"),
-    "diet": ("吃什么", "吃啥", "食物", "食性", "捕食", "饵鱼", "螯虾"),
+    "diet": ("吃什么", "吃啥", "吃的东西", "吃些什么", "以什么为食", "食物", "食性", "捕食", "饵鱼", "螯虾"),
     "habitat": ("水库", "湖泊", "池塘", "回湾", "栖息"),
     # River terms retrieve documented river habitats, not every lake card.
     "river_habitat": ("河流", "河边", "河岸", "溪流", "大河", "回湾"),
@@ -26,7 +26,7 @@ CONCEPTS = {
     "color": ("颜色", "饵色", "光照"),
     "clarity": ("浑水", "水浑", "水色", "浑浊"),
     "oxygen": ("溶氧", "溶解氧", "缺氧", "氧气"),
-    "stratification": ("深水", "深层", "表层", "分层", "最深"),
+    "stratification": ("深水", "深层", "表层", "分层", "最深", "越深", "越往深处"),
     "water_temperature": ("水温",),
     "air_temperature": ("气温",),
     "weather": ("天气", "预报", "降水", "风速"),
