@@ -8,6 +8,8 @@ from pathlib import Path
 import re
 from time import perf_counter
 
+from observation_policy import observation_answer
+from context_guard import context_conflicts
 from llm import ModelError
 from grounding import validate_grounded, OUTPUT_INSTRUCTION
 from retriever import has_out_of_scope, normalize
@@ -31,8 +33,10 @@ SYSTEM_PROMPT = '''你是LureSense，提供淡水大口黑鲈的条件化知识�
 effective_question是已按当前状态处理的问题；current_context是唯一有效的现场条件。
 若槽位被标记corrected，原问题中该槽位的旧值已失效；即使改为unknown也不得沿用旧值。
 所有用户条件都是自述，verified=false，不得写成实测或已证实。unknown/unanswered保持未知。
+未观察到只说明观察记录，不代表已证明结构不存在。不得改写成“没有覆盖”“现场缺乏结构”等前提。
 未观察到不等于不存在。不要把没有看到的水草/倒木当作当前现场已有的结构。
 气温不得当作水温，温度来源未知时不可补造来源或水温；不得推出鱼存在概率或中鱼率。
+不得将“溪流常年水潭”的“常年”扩展修饰湖泊等其他水域；引用K005时保留密苏里资料语境。
 保留资料地域、物种和适用条件；地区未知时给一般性有限说明，不声称适用于当前现场。
 claim是来源主张，application_note是项目推断；采用推断时在文字中明确写“项目推断”。
 不要把“影响生物活动”升级为“任何任务必须精确测量”等资料没有支持的强制结论。
@@ -40,6 +44,9 @@ claim是来源主张，application_note是项目推断；采用推断时在文�
 观察任务只提出有依据的候选，不将候选升级为优先级、必要测量或装备要求。
 涉及幼鱼与成鱼等比较时，只回答证据覆盖的部分，在caveat说明缺失部分；不得把成鱼结论套用于幼鱼。
 项目推断应尽可能引用支持推断的claim；application_note不是独立外部证据。
+若用户询问观察什么且已报告具体结构，回答应包含直接对应该结构的有限观察建议，不仅复述一般事实。
+建议只针对current_context中已报告的结构，不扩展到附近可能存在的其他结构；一般来源事实可以保留其原有范围。
+使用“可以作为观察候选”，不得以“应重点观察”“重要利用点”等措辞代替尚无证据的比较。
 输出必须遵守下面附加的证据契约。
 '''
 
@@ -75,6 +82,24 @@ def extract_initial(question):
                 r'(?:我|我们)?(?:目前|暂时)?(?:没有观察到|未观察到|没看到|没有看到)'
                 r'水草[、和或及]倒木[、和或及]岩石', text.strip()):
             result[slot] = '未观察到上述结构'
+            continue
+        if slot == 'cover' and any(word in text for word in ('不', '没', '无', '可能', '或', '如果', '假如', '也许', '是否')):
+            # Retain explicit positive observations in separate clauses only.
+            # A disputed mention of the same structure cancels its extraction.
+            positive, disputed = set(), set()
+            for part in re.split(r'[，,。；;！？!?]|但是|但|不过', text):
+                terms = {t for t in ('水草', '倒木', '岩石') if t in part}
+                if '石块' in part:
+                    terms.add('岩石')
+                if any(w in part for w in ('不', '没', '无', '可能', '或', '如果', '假如', '也许', '是否')):
+                    disputed.update(terms)
+                elif re.search(r'看到|观察到', part):
+                    positive.update(terms)
+            values = positive - disputed
+            if values == {'水草', '倒木'}:
+                result[slot] = '水草和倒木'
+            elif len(values) == 1:
+                result[slot] = next(iter(values))
             continue
         if any(word in text for word in ('不', '没', '无', '可能', '或', '如果', '假如', '也许', '是否')):
             continue
@@ -240,6 +265,24 @@ def respond(session, kb, mode='mock', client_factory=None):
             answer = validate_grounded(raw, [r['card'] for r in rows])
             if answer['followup_question'] is not None:
                 raise ModelError('模型自行生成了追问；追问须由会话流程管理，本次回答未展示')
+            conflicts = context_conflicts(answer, session.context())
+            if conflicts:
+                result['model_answer_before_guard'] = deepcopy(answer)
+                result['context_guard_conflicts'] = conflicts
+                result['answer_origin'] = 'context_guard_v1'
+                result['message'] = ('当前结构尚未确认，不能据此断言存在或不存在。'
+                                     '本次生成包含与当前观察状态不一致的表述，已停止展示相关主张。'
+                                     '现有条件不足以给出可靠的位置建议。')
+                answer = {'status': 'insufficient_evidence', 'claims': [], 'followup_question': None}
+            controlled = observation_answer(session.effective_question(), session.task,
+                                            session.context(), [r['card'] for r in rows], answer)
+            if controlled is not None:
+                result['model_answer_before_policy'] = deepcopy(answer)
+                answer = validate_grounded(json.dumps(controlled, ensure_ascii=False), [r['card'] for r in rows])
+                result['answer_origin'] = 'reviewed_observation_policy_v1'
+                result['policy_scope'] = '仅对明确结构的简单观察问题规范表达；不是语义核查'
+            else:
+                result.setdefault('answer_origin', 'model')
             used = {ref for claim in answer['claims'] for ref in claim['evidence_ids']}
             result.update(answer, evidence=[r for r in rows if r['card']['id'] in used])
         except (ModelError, ValueError) as error:
@@ -247,7 +290,8 @@ def respond(session, kb, mode='mock', client_factory=None):
     notices = []
     if any(item['corrected'] for item in session.facts.values()):
         notices.append('条件已更新；被修改的旧条件不再作为当前已确认事实。')
-    if result['status'] == 'insufficient_evidence' and session.task != 'out_of_scope':
+    if (result['status'] == 'insufficient_evidence' and session.task != 'out_of_scope'
+            and result.get('answer_origin') != 'context_guard_v1'):
         if any(t in session.question for t in ('水温', '温度')) and any(t in session.question for t in ('准确', '此刻', '实时')):
             notices.append('缺少该水域对应位置、深度和时间的水温测量数据，无法给出准确现场水温；如有测量记录，可提供数值、单位和时间。')
         elif session.task == 'site':
@@ -300,4 +344,4 @@ def session_record(session, kb):
             'request_settings': {'max_completion_tokens': 1200, 'response_format': 'json_object',
                                  'temperature': 'provider_default'},
             'code_sha256': {name: hashlib.sha256((Path(__file__).parent / name).read_bytes()).hexdigest()
-                           for name in ('context_agent.py', 'agent_v03.py', 'retriever.py', 'llm.py', 'grounding.py')}}
+                           for name in ('context_agent.py', 'agent_v03.py', 'retriever.py', 'llm.py', 'grounding.py', 'observation_policy.py', 'context_guard.py')}}

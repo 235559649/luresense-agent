@@ -1,0 +1,62 @@
+{
+  "description": "Recorded model answer from variants_01, session 1 response 0; replay only, not a new model call.",
+  "context": {
+    "waterbody": {
+      "value": "湖泊",
+      "status": "user_reported",
+      "source": "rule_extraction",
+      "verified": false,
+      "corrected": false
+    },
+    "cover": {
+      "value": null,
+      "status": "unknown",
+      "source": "user_selection",
+      "verified": false,
+      "corrected": true
+    },
+    "temperature_source": {
+      "value": null,
+      "status": "unanswered",
+      "source": null,
+      "verified": false,
+      "corrected": false
+    }
+  },
+  "answer": {
+    "status": "answered",
+    "claims": [
+      {
+        "kind": "source_fact",
+        "text": "大口黑鲈出现在湖泊、人工蓄水区、溪流常年水潭及大河静水回湾等水域",
+        "evidence_ids": [
+          "K005"
+        ],
+        "anchors": [
+          {
+            "card_id": "K005",
+            "field": "claim",
+            "quote": "资料记录其出现在湖泊、人工蓄水区、溪流常年水潭及大河静水回湾。"
+          }
+        ],
+        "caveat": null
+      },
+      {
+        "kind": "project_inference",
+        "text": "在湖泊岸边水浑的条件下，可以作为观察候选的重点结构应是附近已知的植被或其他覆盖物，以寻找可能的黑鲈栖息位点",
+        "evidence_ids": [
+          "K010"
+        ],
+        "anchors": [
+          {
+            "card_id": "K010",
+            "field": "application_note",
+            "quote": "先确认植被和用户装备；不宣称必不挂底或必有效。"
+          }
+        ],
+        "caveat": "该推断基于佛州黑鲈对浓植被区的钓法适用性，无法确认所有湖泊均有此结构，现场实际存在尚需用户确认"
+      }
+    ],
+    "followup_question": null
+  }
+}

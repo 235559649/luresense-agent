@@ -2,6 +2,7 @@
 const $ = id => document.getElementById(id);
 let config, current, busy = false;
 const names = {waterbody: '水域', cover: '可见结构', temperature_source: '温度来源'};
+const statuses = {answered:'已回答',insufficient_evidence:'证据不足',error:'请求失败',budget_exhausted:'本会话请求次数已用完'};
 const routes = {knowledge:'知识问答',site:'现场条件',temperature:'温度条件',out_of_scope:'范围不适用'};
 function node(tag, text, cls) { const el = document.createElement(tag); if(text !== undefined) el.textContent=text; if(cls) el.className=cls; return el; }
 function error(message) { $('error').textContent=message; $('error').hidden=!message; }
@@ -30,13 +31,16 @@ function render(data) {
   $('metrics').textContent=`${routes[data.task]||data.task} · 自动追问 ${data.questions_asked}/2 · 模型请求 ${data.model_requests}/3`;
   $('trace').replaceChildren();
   data.events.forEach(event=>{
-    let text=event.event==='start'?'识别问题类型：'+(routes[event.task]||event.task):event.event==='ask'?'询问'+names[event.slot]:event.event==='update'?'更新'+names[event.slot]+'：'+(event.current.value??'不知道'):event.event==='response'?'处理结果：'+event.result.status+(event.result.request_attempted?'（尝试模型请求）':'（未请求模型）'):event.event;
+    let text=event.event==='start'?'识别问题类型：'+(routes[event.task]||event.task):event.event==='ask'?'询问'+names[event.slot]:event.event==='update'?'更新'+names[event.slot]+'：'+(event.current.value??'不知道'):event.event==='response'?'处理结果：'+(statuses[event.result.status]||event.result.status)+(event.result.request_attempted?'（尝试模型请求）':'（未请求模型）'):event.event;
     $('trace').append(node('li',text));
   });
   $('answer').replaceChildren();$('evidence').replaceChildren();
   const result=data.result;
   if(!result){$('answer').append(node('p','补齐必要条件后继续。','placeholder'));$('evidence-count').textContent='0 条';return;}
+  const title = result.answer_origin==='context_guard_v1' ? '回答与当前条件冲突，已停止展示' : (statuses[result.status]||result.status);
+  $('answer').append(node('strong',title));
   if(result.message) $('answer').append(node('p',result.message));
+  if(result.status==='error') $('answer').append(node('p','请先导出本次记录，再检查终端提示和接口配置。','caveat'));
   if(result.status==='insufficient_evidence'&&!result.message) $('answer').append(node('p','当前证据不足以支持回答。'));
   result.claims.forEach(claim=>{
     const card=node('div',undefined,'claim');card.append(node('span',claim.kind==='source_fact'?'来源事实 · 待核对':'项目推断','kind '+(claim.kind==='project_inference'?'inference':'')),node('p',claim.text));
