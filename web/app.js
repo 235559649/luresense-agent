@@ -40,6 +40,8 @@ function render(data) {
   const title = result.answer_origin==='context_guard_v1' ? '回答与当前条件冲突，已停止展示' : (statuses[result.status]||result.status);
   $('answer').append(node('strong',title));
   if(result.message) $('answer').append(node('p',result.message));
+  if(result.answer_origin==='reviewed_observation_policy_v1') $('answer').append(node('p','观察建议已按规则规范表达；不代表现场有鱼。','origin-note'));
+  if(result.synthetic) $('answer').append(node('p','模拟结果：未调用真实模型。','origin-note'));
   if(result.status==='error') $('answer').append(node('p','请先导出本次记录，再检查终端提示和接口配置。','caveat'));
   if(result.status==='insufficient_evidence'&&!result.message) $('answer').append(node('p','当前证据不足以支持回答。'));
   result.claims.forEach(claim=>{

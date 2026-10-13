@@ -4,15 +4,19 @@
 <body>
 <header><a class="brand" href="/">LureSense<span>淡水路亚 · 证据辅助决策</span></a><span id="mode" class="badge">连接中</span></header>
 <main>
-<section class="intro"><p class="eyebrow">OBSERVE · ASK · VERIFY</p><h1>先了解水域，再讨论建议。</h1><p>面向大口黑鲈的知识助手。补充你知道的条件，查看建议背后的资料；不知道的，留作未知。</p></section>
+<section class="intro">
+<div class="intro-copy"><p class="eyebrow">LURESENSE / FIELD NOTES</p><h1>从眼前的水域，<br>开始一次有依据的观察。</h1><p class="intro-description">描述你看到的条件，得到有限的观察建议。每条回答都留出核对资料、修改条件和承认未知的空间。</p><div class="scope-tags"><span>淡水 · 大口黑鲈</span><span>来源可查</span><span>条件可修改</span></div></div>
+<figure class="landscape"><svg viewBox="0 0 540 330" role="img" aria-labelledby="landscape-title landscape-desc" xmlns="http://www.w3.org/2000/svg"><title id="landscape-title">湖岸与水草示意插画</title><desc id="landscape-desc">远山、平静湖面和岸边植被的装饰性示意，不表示现场存在鱼或已检测到结构。</desc><defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#e4eee1"/><stop offset="1" stop-color="#faf5de"/></linearGradient><linearGradient id="lake" x2="0" y2="1"><stop stop-color="#7da99a"/><stop offset="1" stop-color="#2d6659"/></linearGradient></defs><rect width="540" height="330" fill="url(#sky)"/><circle cx="415" cy="66" r="30" fill="#f1d699"/><path d="M0 157L65 89 138 147 209 64 303 149 389 104 465 150 540 90V215H0Z" fill="#bbcdbb"/><path d="M0 167L95 128 181 181 282 121 362 164 445 138 540 180V221H0Z" fill="#92b3a1"/><path d="M0 188Q134 175 275 193T540 184V330H0Z" fill="url(#lake)"/><g fill="none" stroke="#c9ddd0" stroke-width="2" opacity=".65"><path d="M54 209H181M242 216H382M363 198H448M142 241H280M325 263H436M58 279H129M197 303H333"/></g><path d="M0 291Q90 249 166 303L201 330H0Z" fill="#274d3f"/><g stroke="#376749" stroke-width="5" fill="none" stroke-linecap="round"><path d="M31 305L23 215M43 304L61 231M65 310L78 246M91 320L109 258M471 330L467 258M490 330L507 245M515 330L529 268"/></g><g stroke="#afba86" stroke-width="7" stroke-linecap="round"><path d="M23 224V206M61 239L65 222M467 267V250M508 255L512 238"/></g><path d="M143 288L218 310M175 297L187 280" stroke="#92704d" stroke-width="9" stroke-linecap="round"/><g fill="#f2f4de" opacity=".8"><circle cx="310" cy="239" r="2"/><circle cx="315" cy="241" r="1"/></g></svg><figcaption>湖岸示意插画 · 非现场照片或检测结果</figcaption></figure>
+</section>
+<nav class="workflow" aria-label="使用步骤"><span><b>01</b> 描述现场或提出问题</span><span><b>02</b> 确认你知道的条件</span><span><b>03</b> 阅读建议，核对依据</span></nav>
 <div class="layout"><section class="primary">
 <article class="card"><div class="section-title"><h2>你想了解什么？</h2><span>01 / 提问</span></div>
-<form id="question-form"><label for="question" class="sr-only">输入问题</label><textarea id="question" maxlength="1000" rows="3" placeholder="我在淡水边，应该先看哪里？" required>我在淡水边，应该先看哪里？</textarea><div class="form-footer"><span>问题和条件会在真实模式下发送至配置的模型服务。</span><button type="submit">开始分析 →</button></div></form>
+<form id="question-form"><label for="question" class="sr-only">输入问题</label><textarea id="question" maxlength="1000" rows="3" placeholder="我在淡水边，应该先看哪里？" required>我在淡水边，应该先看哪里？</textarea><div class="form-footer"><span>问题和条件会在真实模式下发送至配置的模型服务。</span><button type="submit">开始提问 →</button></div></form>
 <div class="examples"><button type="button" data-example="大口黑鲈吃什么？">食性知识</button><button type="button" data-example="我在湖泊，看到水草和倒木，应该先看哪里？">条件完整</button><button type="button" data-example="气温能直接代替水温吗？">气温与水温</button></div>
 </article>
 <div id="error" class="error" role="alert" hidden></div><p id="activity" role="status" aria-live="polite"></p>
 <article id="followup-card" class="card" hidden><div class="section-title"><h2>补充一个条件</h2><span>02 / 澄清</span></div><p id="followup-text"></p><div id="followup-options" class="options"></div></article>
-<article class="card answer"><div class="section-title"><h2>回答与依据</h2><span>03 / 核对</span></div><div id="answer"><p class="placeholder">开始一个问题后，这里会显示回答、推断限制与证据。</p></div></article>
+<article class="card answer" aria-live="polite" aria-atomic="false"><div class="section-title"><h2>回答与依据</h2><span>03 / 核对</span></div><div id="answer"><div class="answer-empty"><span class="empty-symbol" aria-hidden="true">◎</span><p>先提出一个问题</p><small>回答会区分来源事实与项目推断，并显示适用限制。</small></div></div></article>
 <article class="card"><div class="section-title"><h2>来源资料</h2><span id="evidence-count">0 条</span></div><div id="evidence"><p class="placeholder">资料会与当前回答一起展示。</p></div></article>
 </section>
 <aside>
