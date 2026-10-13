@@ -1,91 +1,108 @@
-# LureSense RAG v0.2
+# LureSense
 
-日期：2026-09-22。沿用22张知识卡和8个来源，增加固定RAG、引用检查和可配置模型接口。
+淡水大口黑鲈知识问答与现场观察助手。结合知识卡检索、有限条件澄清、引用结构校验和上下文规则检查，提供带来源与限制的回答。
 
-**新用户先运行mock模式，再配置真实模型。** 模拟模式只摘录资料，绝不代表真实大模型效果。当前还没有动态Agent、天气、图片或多轮记忆。
+这是可在本机运行的个人项目原型。不会预测鱼存在概率或保证中鱼率；没有接入图像识别、实时天气或可穿戴设备。
 
-## 1. 解压与运行
+## 快速启动
 
-需要Python 3.11或以上，没有第三方依赖。打开终端，输入 `cd `，将解压的 `LureSense_RAG_v02` 文件夹拖入终端后回车。
+## 快速启动
 
-```bash
-python3 --version
-python3 app.py --mode mock --query "大口黑鲈吃什么？"
-```
+需要 Python 3.11 或以上，无需安装第三方 Python 依赖。
 
-应该显示“模拟模式：规则摘录，未调用大模型”，随后是带K编号的资料和来源。
+### 1. 进入仓库根目录
 
-保留原来的纯检索方式：
+如果当前位于仓库的上一级目录：
 
 ```bash
-python3 app.py --mode retrieve --query "水草附近可以先了解什么？"
+cd luresense-agent
 ```
 
-## 2. 接入真实模型
+仓库根目录应包含 `doctor.py`、`web_app.py` 和 `data/`。
+后续命令均在此目录执行。
 
-准备支持Chat Completions接口、JSON object模式及max_completion_tokens参数的模型账户。填写你账户中真实可用的模型ID，不能照抄占位词。默认基础URL为OpenAI API；如使用其他兼容服务，先根据该服务官方文档核实地址与参数支持，兼容性尚未逐家验证。
+### 2. 检查环境
 
 ```bash
-python3 app.py --mode rag --model "填写实际模型ID" --api-key-prompt --query "大口黑鲈吃什么？"
+python3 doctor.py
 ```
 
-命令会在本机隐藏询问API Key；输入后不显示字符属于正常现象。不要把密钥发到聊天中。真实请求会把你的问题和命中卡片发送给配置的模型服务。不要在--model中放密钥。
-
-其他基础URL示例结构（占位地址不可直接使用）：
+### 3. 启动网页
 
 ```bash
-python3 app.py --mode rag --base-url "https://你的服务域名/v1" --model "实际模型ID" --api-key-prompt --query "水草附近可以先了解什么？"
+python3 web_app.py --mode mock --port 8765
 ```
 
-也支持环境变量MODEL_NAME、MODEL_API_KEY、MODEL_BASE_URL；不会自动读取.env文件。凭据不保存到结果文件。
+浏览器打开 http://127.0.0.1:8765 。
 
-本次没有用户的模型账户，因此**真实付费接口尚未联调**。HTTP400可能是服务不支持当前参数；401通常需要核对认证；429需要核对限流或配额。错误仅显示状态，不回显服务错误正文。请求不自动重试，避免重复付费。
+停止服务：在终端按 `Ctrl+C`。
 
-## 3. 保存第一条实验记录
+> 使用 IDE 的 Markdown 快捷运行时，请将工作目录设置为仓库根目录。
+> README 所在位置不会自动成为命令的工作目录。
+## 真实模型模式
+
+先做离线配置检查，再启动：
 
 ```bash
-python3 app.py --mode mock --query "气温能代替水温吗？" --save first_mock_run.json
+python3 doctor.py --mode rag --model gpt-4.1-mini --api-key-prompt
+python3 web_app.py --mode rag --model gpt-4.1-mini --base-url https://api.openai.com/v1 --api-key-prompt --port 8765
 ```
 
-真实模式同样加--save，建议每题用不同文件名。记录包含问题、回答、检索ID、来源、模式标志、模型名称、用量（如果返回）、耗时、提示词/知识/源码哈希。已有文件不会覆盖。API失败或输出校验失败不会生成成功记录，须将失败另外记入实验总数，不能从分母悄悄删除。
+示例模型来自本项目已有运行记录，不保证所有账户可用。doctor 不联网、不验证密钥有效性或余额。模型服务必须兼容本项目使用的 Chat Completions JSON 请求。使用其他服务时须同时替换配套地址和模型名称。
 
-## 4. 这版增加什么
+密钥在终端隐藏输入，仅后端内存使用。问题和检索卡片会发送到配置的模型服务。支持 MODEL_NAME、MODEL_API_KEY、MODEL_BASE_URL 环境变量；不会自动读取 .env 文件。请勿把实际密钥提交到仓库。
 
-| 文件 | 作用 |
-| --- | --- |
-| retriever.py | 原关键词检索 |
-| llm.py | HTTPS模型请求、超时和错误处理 |
-| rag.py | 组织证据、校验JSON和引用、渲染来源、保存运行记录 |
-| app.py | retrieve/mock/rag三个模式 |
-| evaluate_retrieval.py | 开发题的参考卡片覆盖检查 |
-| tests/test_rag.py | 模拟响应和校验测试 |
-| RESEARCH_ROADMAP.md | 如何形成研究问题、基线、消融和报告 |
+## CLI 与评分
 
-## 5. 测试与小型检索检查
+```bash
+mkdir -p runs/demo
+python3 agent_v03.py --mode rag --model gpt-4.1-mini --api-key-prompt --query "我在湖泊岸边，看到倒木，应该先观察哪里？" --save runs/demo/session_01.json
+```
+
+通过 /water、/cover、/temperature 修改条件，/new 开始新问题，/exit 保存退出。每个会话最多两项自动追问、三次模型请求（失败也计入）。已有保存文件不会覆盖。
+
+```bash
+python3 review_runs.py prepare --run runs/demo/session_01.json --out runs/demo/review_01.json
+```
+
+人工填写 reviewer、回答评分、claim_reviews 的 support 和理由；不改原回答、证据、编号和源日志。完成后：
+
+```bash
+python3 review_runs.py summarize --review runs/demo/review_01.json --out runs/demo/summary_01.json
+```
+
+网页导出的运行 JSON 也可作为 --run 输入。未评分或没有有效分母时不能解释为准确率。
+
+## 测试与评估
 
 ```bash
 python3 -m unittest discover -s tests -v
-python3 evaluate_retrieval.py
+python3 benchmark_v05.py --split all --out runs/benchmark_checkpoint_01
 ```
 
-24项软件测试通过。覆盖模型响应格式错误、伪造引用、未检索卡片、接口错误、缺失配置、截断、来源保留、记录防覆盖等。模型请求测试使用模拟响应，并未调用真实模型。
+基准输出目录须不存在。离线基准比较 direct、append_context、agent_state 的检索与状态指标，不调用真实模型，不能代替回答质量评估。当前交付在开发环境通过153个Python测试。
 
-6个有参考卡片的开发题中，参考覆盖均值83.3%；详细结果见eval/retrieval_pilot.json。不能称为RAG准确率或生态预测准确率。其余4题无参考卡，不纳入此检索指标。
+真实开发案例及已知失败见 [评估检查点](docs/VALIDATION_CHECKPOINT.md)。这些是参与开发的少量案例，不是独立盲测。模型原始回答与规则处理后的最终回答必须区分：answer_origin、model_answer_before_policy、model_answer_before_guard 保留处理来源。
 
-## 6. 必须理解的限制
+## 主要模块
 
-- 引用ID合法检查不会判断“这条资料是否真的支持这句话”；保留了测试来明确这一盲区。
-- 某些OpenAI兼容服务的参数不同，首次真实调用才可核实该服务兼容性。
-- 单轮RAG没有多轮事实状态，即使模型返回追问，后续回答也不会自动合并上下文；这是下一阶段任务。
-- 真实模式出错不会静默切成mock伪装成功。
-- 关键词检索不理解复杂否定和比较，照片/天气没有接入。
+| 文件 | 职责 |
+|---|---|
+| web_app.py / web/ | 本地Web服务和交互界面 |
+| agent_v03.py / context_agent.py | CLI、路由、有限澄清和条件更新 |
+| retriever.py / data/ | 关键词检索、知识卡及来源元数据 |
+| llm.py / grounding.py | 模型接口及JSON、引用编号、知识卡摘录校验 |
+| observation_policy.py / context_guard.py | 有限观察建议规范与条件冲突检查 |
+| review_runs.py / benchmark_v05.py | 人工评分汇总和离线基准 |
+| doctor.py | 不联网的启动前环境与配置检查 |
 
-## 7. 接下来一周
+## 已知局限
 
-1. 运行retrieve和mock，各保存一条记录。
-2. 读WALKTHROUGH，能解释每个模块的职责。
-3. 配置模型，跑5个开发题，并手工核对引用和结论。
-4. 保留成功、拒答、失败，别只截图最好的回答。
-5. 真实基线稳定后，再实现RESEARCH_ROADMAP中的主动澄清机制。
+- 引用合法与摘录匹配不代表结论一定获得支持；仍需人工核查。
+- 有限中文规则可能漏拦或误拦，不是通用语义验证。
+- 地域、物种和生态适用范围可能在生成中遗漏；K005地域范围是已知改进项。
+- 用户自述未经实测验证；观察候选不证明鱼存在。
+- Web仅监听127.0.0.1，是本机演示，不是已完成公网部署的服务。
+- 请求失败不伪装正常回答，不自动重试；费用和用量以服务商实际记录为准。
 
-接口依据：https://developers.openai.com/api/reference/resources/chat 。当前适配限定Chat Completions请求格式，不保证所有模型供应商支持。
+完整手工验收与Git提交步骤见 [Web收尾指南](docs/WEB_HANDOFF.md)。
