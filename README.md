@@ -114,3 +114,20 @@ python3 benchmark_v05.py --split all --out runs/benchmark_checkpoint_01
 - 请求失败不伪装正常回答，不自动重试；费用和用量以服务商实际记录为准。
 
 完整手工验收与Git提交步骤见 [Web收尾指南](docs/WEB_HANDOFF.md)。
+
+
+### 上下文规则评估
+
+使用固定的人工开发案例，评估上下文检查的正确拦截、
+误拦与漏拦。无需联网，不调用模型。
+
+```bash
+mkdir -p runs/guard_eval
+python3 evaluate_guard.py --out runs/guard_eval/dev_01.json
+```
+
+结果包含混淆矩阵、指标分母、失败案例，以及规则和数据集
+的 SHA256。已有输出文件不会覆盖。
+
+这些案例用于开发与回归检查，不是独立盲测；
+指标不代表真实模型准确率或完整系统的回答质量。
