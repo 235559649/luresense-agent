@@ -6,19 +6,26 @@
 
 ## 快速启动
 
-## 快速启动
-
 需要 Python 3.11 或以上，无需安装第三方 Python 依赖。
 
-### 1. 进入仓库根目录
+### 1. 进入程序目录
 
-如果当前位于仓库的上一级目录：
+在终端进入包含 `doctor.py`、`web_app.py` 和 `data/` 的目录。
+
+例如，如果当前目录下的程序位于 `LureSense/luresense-agent/`：
 
 ```bash
-cd luresense-agent
+cd LureSense/luresense-agent
 ```
 
-仓库根目录应包含 `doctor.py`、`web_app.py` 和 `data/`。
+如果已经位于该目录，无需再次执行 `cd`。
+
+确认文件存在：
+
+```bash
+ls doctor.py web_app.py
+```
+
 后续命令均在此目录执行。
 
 ### 2. 检查环境
@@ -45,7 +52,7 @@ python3 web_app.py --mode mock --port 8765
 
 ```bash
 python3 doctor.py --mode rag --model gpt-4.1-mini --api-key-prompt
-python3 web_app.py --mode rag --model gpt-4.1-mini --base-url https://api.openai.com/v1 --api-key-prompt --port 8765
+python3 web_app.py --mode rag --model gpt-4.1-mini --base-url "https://api.openai.com/v1" --api-key-prompt --port 8765
 ```
 
 示例模型来自本项目已有运行记录，不保证所有账户可用。doctor 不联网、不验证密钥有效性或余额。模型服务必须兼容本项目使用的 Chat Completions JSON 请求。使用其他服务时须同时替换配套地址和模型名称。
@@ -80,7 +87,7 @@ python3 -m unittest discover -s tests -v
 python3 benchmark_v05.py --split all --out runs/benchmark_checkpoint_01
 ```
 
-基准输出目录须不存在。离线基准比较 direct、append_context、agent_state 的检索与状态指标，不调用真实模型，不能代替回答质量评估。当前交付在开发环境通过153个Python测试。
+基准输出目录须不存在。离线基准比较 direct、append_context、agent_state 的检索与状态指标，不调用真实模型，不能代替回答质量评估。测试数量与结果以当前版本的测试输出和 CI 记录为准。
 
 真实开发案例及已知失败见 [评估检查点](docs/VALIDATION_CHECKPOINT.md)。这些是参与开发的少量案例，不是独立盲测。模型原始回答与规则处理后的最终回答必须区分：answer_origin、model_answer_before_policy、model_answer_before_guard 保留处理来源。
 
@@ -95,6 +102,7 @@ python3 benchmark_v05.py --split all --out runs/benchmark_checkpoint_01
 | observation_policy.py / context_guard.py | 有限观察建议规范与条件冲突检查 |
 | review_runs.py / benchmark_v05.py | 人工评分汇总和离线基准 |
 | doctor.py | 不联网的启动前环境与配置检查 |
+| audit_runs.py | 审计原始模型输出、规则拦截、策略改写与 Token 用量 |
 
 ## 已知局限
 
