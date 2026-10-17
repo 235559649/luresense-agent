@@ -2,7 +2,13 @@
 const $ = id => document.getElementById(id);
 let config, current, busy = false;
 const names = {waterbody: '水域', cover: '可见结构', temperature_source: '温度来源'};
-const statuses = {answered:'已回答',insufficient_evidence:'证据不足',error:'请求失败',budget_exhausted:'本会话请求次数已用完'};
+const statuses = {
+  evidence_only: '候选资料（模拟模式）',
+  answered: '已回答',
+  insufficient_evidence: '证据不足',
+  error: '请求失败',
+  budget_exhausted: '本会话请求次数已用完'
+};
 const routes = {knowledge:'知识问答',site:'现场条件',temperature:'温度条件',out_of_scope:'范围不适用'};
 function node(tag, text, cls) { const el = document.createElement(tag); if(text !== undefined) el.textContent=text; if(cls) el.className=cls; return el; }
 function error(message) { $('error').textContent=message; $('error').hidden=!message; }
@@ -41,7 +47,15 @@ function render(data) {
   $('answer').append(node('strong',title));
   if(result.message) $('answer').append(node('p',result.message));
   if(result.answer_origin==='reviewed_observation_policy_v1') $('answer').append(node('p','观察建议已按规则规范表达；不代表现场有鱼。','origin-note'));
-  if(result.synthetic) $('answer').append(node('p','模拟结果：未调用真实模型。','origin-note'));
+  if (result.mode === 'mock' || result.synthetic) {
+  $('answer').append(
+    node(
+      'p',
+      '本次未调用真实模型，仅展示检索资料，不生成现场建议。',
+      'origin-note'
+    )
+  );
+}
   if(result.status==='error') $('answer').append(node('p','请先导出本次记录，再检查终端提示和接口配置。','caveat'));
   if(result.status==='insufficient_evidence'&&!result.message) $('answer').append(node('p','当前证据不足以支持回答。'));
   result.claims.forEach(claim=>{
@@ -50,12 +64,77 @@ function render(data) {
     if(claim.caveat) card.append(node('p','限制：'+claim.caveat,'caveat'));
     $('answer').append(card);
   });
-  const evidence=result.evidence||[];$('evidence-count').textContent=evidence.length+' 条';
-  if(!evidence.length) $('evidence').append(node('p','本次没有可展示的引用证据。','placeholder'));
-  evidence.forEach(row=>{
-    const d=node('details');d.append(node('summary',row.card.id+' · '+row.card.title),node('p',row.card.claim),node('p','适用条件：'+row.card.applicability),node('p','项目推断：'+row.card.application_note));
-    row.sources.forEach(source=>{try{const url=new URL(source.url);if(url.protocol==='https:'){const a=node('a',source.title+' ↗');a.href=url.href;a.target='_blank';a.rel='noopener noreferrer';d.append(a);}}catch(e){}d.append(node('p','来源限制：'+source.limitations));});$('evidence').append(d);
+    const evidence = result.evidence || [];
+  $('evidence-count').textContent = evidence.length + ' 条';
+
+  if (!evidence.length) {
+    $('evidence').append(
+      node('p', '本次没有可展示的引用证据。', 'placeholder')
+    );
+  }
+
+  // 仅调整展示方式，保留原检索顺序。
+  const compactEvidence =
+    result.status === 'evidence_only' && evidence.length > 1;
+
+  let otherEvidence;
+
+  if (compactEvidence) {
+    $('evidence').append(
+      node(
+        'p',
+        '首条检索资料（按检索顺序展示，不代表已验证适用于现场）',
+        'origin-note'
+      )
+    );
+
+    otherEvidence = node('details');
+    otherEvidence.append(
+      node('summary', `其他参考资料（${evidence.length - 1} 条）`)
+    );
+  }
+
+  evidence.forEach((row, index) => {
+    const d = node('details');
+
+    d.append(
+      node('summary', row.card.id + ' · ' + row.card.title),
+      node('p', row.card.claim),
+      node('p', '适用条件：' + row.card.applicability),
+      node('p', '项目推断：' + row.card.application_note)
+    );
+
+    row.sources.forEach(source => {
+      try {
+        const url = new URL(source.url);
+
+        if (url.protocol === 'https:') {
+          const a = node('a', source.title + ' ↗');
+          a.href = url.href;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          d.append(a);
+        }
+      } catch (e) {
+        // 无效链接不显示，仍保留来源限制文字。
+      }
+
+      d.append(node('p', '来源限制：' + source.limitations));
+    });
+
+    if (compactEvidence && index > 0) {
+      otherEvidence.append(d);
+    } else {
+      if (result.status === 'evidence_only' && index === 0) {
+        d.open = true;
+      }
+      $('evidence').append(d);
+    }
   });
+
+  if (otherEvidence) {
+    $('evidence').append(otherEvidence);
+  }
 }
 function choose(slot,choice){return execute(async()=>render(await request('/api/choose',{session_id:current.session_id,slot,choice})));}
 $('question-form').onsubmit=event=>{event.preventDefault();const question=$('question').value.trim();if(!question)return;execute(async()=>render(await request('/api/start',{question})));};
