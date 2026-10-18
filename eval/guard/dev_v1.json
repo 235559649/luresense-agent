@@ -1,0 +1,198 @@
+{
+  "schema_version": "guard-dataset-1",
+  "name": "context_guard_dev_v1",
+  "split": "dev",
+  "provenance": "AI-authored development examples; not a blind test",
+  "cases": [
+    {
+      "id": "D01",
+      "context": {
+        "cover": {
+          "status": "unknown",
+          "value": null
+        }
+      },
+      "answer": {
+        "claims": [
+          {
+            "text": "附近已知的植被可以作为观察重点。",
+            "caveat": null
+          }
+        ]
+      },
+      "expected_block": true,
+      "label_reason": "未知条件被升级为存在"
+    },
+    {
+      "id": "D02",
+      "context": {
+        "cover": {
+          "status": "unknown",
+          "value": null
+        }
+      },
+      "answer": {
+        "claims": [
+          {
+            "text": "现场没有水草，可以直接排除草区。",
+            "caveat": null
+          }
+        ]
+      },
+      "expected_block": true,
+      "label_reason": "未知条件被升级为不存在"
+    },
+    {
+      "id": "D03",
+      "context": {
+        "cover": {
+          "status": "unknown",
+          "value": null
+        }
+      },
+      "answer": {
+        "claims": [
+          {
+            "text": "看不清水底不代表没有水草。",
+            "caveat": null
+          }
+        ]
+      },
+      "expected_block": false,
+      "label_reason": "否定错误推断"
+    },
+    {
+      "id": "D04",
+      "context": {
+        "cover": {
+          "status": "unknown",
+          "value": null
+        }
+      },
+      "answer": {
+        "claims": [
+          {
+            "text": "如果现场有水草，可以记录其分布。",
+            "caveat": null
+          }
+        ]
+      },
+      "expected_block": false,
+      "label_reason": "条件假设"
+    },
+    {
+      "id": "D05",
+      "context": {
+        "cover": {
+          "status": "user_reported",
+          "value": "倒木"
+        }
+      },
+      "answer": {
+        "claims": [
+          {
+            "text": "已确认的倒木可作为观察候选，不保证有鱼。",
+            "caveat": null
+          }
+        ]
+      },
+      "expected_block": false,
+      "label_reason": "已报告结构作为候选"
+    },
+    {
+      "id": "D06",
+      "context": {
+        "cover": {
+          "status": "user_reported",
+          "value": "未观察到上述结构"
+        }
+      },
+      "answer": {
+        "claims": [
+          {
+            "text": "现场缺乏掩护结构。",
+            "caveat": null
+          }
+        ]
+      },
+      "expected_block": true,
+      "label_reason": "未观察到不等于不存在"
+    },
+    {
+      "id": "D07",
+      "context": {
+        "cover": {
+          "status": "unanswered",
+          "value": null
+        }
+      },
+      "answer": {
+        "claims": [
+          {
+            "text": "先确认是否存在水草或倒木。",
+            "caveat": null
+          }
+        ]
+      },
+      "expected_block": false,
+      "label_reason": "请求补充观察"
+    },
+    {
+      "id": "D08",
+      "context": {
+        "cover": {
+          "status": "unknown",
+          "value": null
+        }
+      },
+      "answer": {
+        "claims": [
+          {
+            "text": "这里长满了水草，可以沿草边观察。",
+            "caveat": null
+          }
+        ]
+      },
+      "expected_block": true,
+      "label_reason": "隐含存在表达"
+    },
+    {
+      "id": "D09",
+      "context": {
+        "cover": {
+          "status": "unknown",
+          "value": null
+        }
+      },
+      "answer": {
+        "claims": [
+          {
+            "text": "这片水域找不到任何可供躲藏的地方。",
+            "caveat": null
+          }
+        ]
+      },
+      "expected_block": true,
+      "label_reason": "间接缺失表达"
+    },
+    {
+      "id": "D10",
+      "context": {
+        "cover": {
+          "status": "unknown",
+          "value": null
+        }
+      },
+      "answer": {
+        "claims": [
+          {
+            "text": "先观察能看清的区域，再记录可见结构。",
+            "caveat": null
+          }
+        ]
+      },
+      "expected_block": false,
+      "label_reason": "未假设结构存在"
+    }
+  ]
+}
